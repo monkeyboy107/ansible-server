@@ -10,5 +10,5 @@
 
 - name: List vm_name
   debug:
-    msg: "{{ item }}"
-  loop: "{{ vm_name }}"
+    msg: "{{ item }} {{ vm_name.item }}"
+  loop: "{{ vm_name.keys() | list }}"

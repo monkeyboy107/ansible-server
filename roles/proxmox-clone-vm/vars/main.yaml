@@ -1,2 +1,3 @@
 rocky_8_cloud_init_vmid: 10000
-ansible_ID_start: 4000
+vmid_start: 4000
+vmid_list: []

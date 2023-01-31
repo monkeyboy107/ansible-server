@@ -24,7 +24,7 @@
 - name: Add disks
   include_tasks:
     file: block_storage.yaml
-  loop: "{{ guest_hosts.keys() }}"
+  loop: "{{ guest_hosts }}"
   loop_control:
     loop_var: "guest_host"
   

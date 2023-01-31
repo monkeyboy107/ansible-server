@@ -7,7 +7,7 @@
 - name: Check if VMID is avalible
   loop: "{{ guest_host }}"
   set_fact:
-    vmid_start: {{ vmid_start | int + 1 }}
+    vmid_start: "{{ vmid_start | int + 1 }}"
     vmid_list: "{{ vmid_list + [vmid_start]}}"
   when: vmid_start is not in all_VMIDs
   until: "{{ ansible_play_hosts_all | length == vmid_list | length }}"

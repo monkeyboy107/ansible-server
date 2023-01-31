@@ -16,7 +16,7 @@
 
 # Reconfigures the VMs
 - name: Reconfigure VM(s) CPU and RAM
-  shell: "qm set {{ vm_name[guest_hosts[item.name]] }} --sockets {{ guest_hosts[item.sockets] }} --memory {{ guest_hosts[item.memory] }} --cores {{ guest_hosts[item.cores] }}"
+  shell: "qm set {{ vm_name[ item.name ]] }} --sockets {{ item.sockets }} --memory {{ item.memory }} --cores {{ item.cores }}"
   loop: "{{ guest_hosts | list }}"
   delegate_to: "{{ groups.proxmox_servers[0] }}"
 

@@ -1,7 +1,7 @@
 ---
 # vm_config is a list of the different configs
 - name: Register list of the VM configuration
-  shell: "qm config {{ guest_host }}"
+  shell: "qm config {{ vm_name.guest_host.name }}"
   register: vm_config
   delegate_to: "{{ groups.proxmox_servers[0] }}"
 

@@ -23,4 +23,4 @@
 - name: Clone VM
   shell: "qm clone {{ rocky_8_cloud_init_vmid }} {{ item.1 }} --name {{ item.0 }}"
   delegate_to: "{{ groups.proxmox_servers[0] }}"
-  loop: {{ ansible_play_hosts_all | zip(vmid_list) }}
+  loop: "{{ ansible_play_hosts_all | zip(vmid_list) }}"

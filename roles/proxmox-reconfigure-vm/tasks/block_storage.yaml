@@ -1,0 +1,28 @@
+---
+# vm_config is a list of the different configs
+- name: Register list of the VM configuration
+  shell: "qm config {{ item }}"
+  register: vm_config
+
+# Resets disk_count
+- name: Reset disk_count
+  set_fact:
+    disk_count: "0"
+
+# Determines how many disks currently exsist
+- name: Determines how many disks currently exsist
+  set_fact:
+    disk_count: "{{ disk_count | int + 1}}"
+  when: "{{ disks_count | string is in item and 'lvm' is in item }}"
+
+# Combine the disks that are being created with their ID number that will generate (it's a serial generation so I was able to determine what the next one is because it's just disk_ID +1 starting at 0 for the boot disk )
+- name: Combine disks with numbers
+  set_fact:
+    disks_with_int: "{{ disks_with_int + [[disks_count, inner_item]]}}"
+    disks_count: "{{ disks_count | int + 1 }}"
+  loop: "{{ guest_hosts.guest_host.hdd }}"
+
+# Create disks
+- name: Create disks
+  shell: "pvesm alloc local-lvm {{ vm_name[guest_hosts[item].name] }} '' {{ item.1 }}"
+  loop: "{{ disks_with_int }}"

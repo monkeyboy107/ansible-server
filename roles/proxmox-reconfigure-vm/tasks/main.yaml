@@ -1,14 +1,28 @@
 ---
+# vm_list is all the vms that proxmox has with its corresponding vmid 
 - name: Register the results of qm list
   shell: "qm list | awk '{print $2, $1}'"
   register: vm_list
+  delegate_to: "{{ groups.proxmox_server[0] }}"
 
+# vm_name is dictionary of vm_list so that I can do vm_name.guest_hosts.name and it return the vmid
 - name: Load varible with results from qm list
   set_fact:
     vm_name: "{{ vm_name | combine( {item.split(' ')[0]: item.split(' ')[1]} ) }}"
   loop: "{{ vm_list.stdout_lines }}"
+  delegate_to: "{{ groups.proxmox_server[0] }}"
 
-- name: List vm_name
-  debug:
-    msg: "{{ item }} {{ vm_name[item] }}"
-  loop: "{{ vm_name.keys() | list }}"
+# Reconfigures the VMs
+- name: Reconfigure VM(s) CPU and RAM
+  shell: "qm set {{ vm_name[guest_hosts[item].name] }} --sockets {{ guest_hosts[item].sockets }} --memory {{ guest_hosts[item].memory }} --cores {{ guest_hosts[item].cores }}"
+  loop: "{{ guest_hosts.keys() }}"
+  delegate_to: "{{ groups.proxmox_server[0] }}"
+
+# Divides the next section for if disks are requested
+- name: Add disks
+  include_task: block_storage.yaml
+  loop: "{{ guest_hosts.keys() }}"
+  loop_control:
+    loop_var: "guest_host"
+  delegate_to: "{{ groups.proxmox_server[0] }}"
+  

@@ -8,7 +8,8 @@
   loop: "{{ all_VMIDs.stdout_lines }}"
   set_fact:
     ansible_ID_start: "{{ ansible_ID_start | int + 1}}"
-  until:  item  != ansible_ID_start
+#  until:  item  != ansible_ID_start
+  until: item is not in all_VMIDs
   retries: 1000
   delay: 1
   delegate_to: "ihs-ansible-01"

@@ -4,7 +4,7 @@ ihs-ansible-01
 [ceph_monitors]
 
 [ceph_osds]
-ihs-ceph-osd-01.ihs.org
+ihs-ceph-osd-[01:02].ihs.org
 
 [ceph_admins:children]
 ceph_monitors

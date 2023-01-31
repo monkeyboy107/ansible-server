@@ -5,4 +5,5 @@
  
 - name: Loop vm_list
   debug:
-    msg: "{{ vm_list }}"
+    msg: "{{ item }}"
+  loop: "{{ vm_list.stdout_lines }}"

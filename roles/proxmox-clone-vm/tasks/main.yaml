@@ -5,6 +5,7 @@
   delegate_to: "{{ groups.proxmox_servers[0] }}"
 
 - name: Check next VMID in list
+  run_once: true
   loop: "{{ all_VMIDs.stdout_lines }}"
   set_fact:
     ansible_ID_start: "{{ ansible_ID_start | int + 1}}"
@@ -15,6 +16,7 @@
   delegate_to: "ihs-ansible-01"
 
 - name: Clone VM
+  run_once: true
   shell: "qm clone {{ rocky_8_cloud_init_vmid }} {{ ansible_ID_start }} --name {{ item }}"
   loop: "{{ ansible_play_hosts }}"
   delegate_to: "{{ groups.proxmox_servers[0] }}"

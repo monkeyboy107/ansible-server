@@ -6,7 +6,7 @@
 
 - name: Make dict of VMIDs with hostnames
   set_fact:
-    all_VMIDs_dict: "{{ all_VMIDs_dict | combine({item.split(' ')[0]): item.split(' ')[1]} ) }}"
+    all_VMIDs_dict: "{{ all_VMIDs_dict | combine({item.split(' ')[0]: item.split(' ')[1]} ) }}"
   loop: "{{ all_VMIDs.stdout_lines }}"
 
 - name: Check if VMID is avalible

@@ -24,7 +24,7 @@
   set_fact:
     disks_with_int: "{{ disks_with_int + [disks_count, inner_item]}}"
     disks_count: "{{ disks_count | int + 1 }}"
-  loop: "{{ guest_hosts.guest_host.hdd }}"
+  loop: "{{ guest_host.hdd }}"
   delegate_to: "ihs-ansible-01"
 
 # Create disks

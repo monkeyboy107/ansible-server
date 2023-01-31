@@ -20,10 +20,9 @@
 
 # Divides the next section for if disks are requested
 - name: Add disks
-  import_tasks:
+  include_tasks:
     file: block_storage.yaml
   loop: "{{ guest_hosts.keys() }}"
   loop_control:
     loop_var: "guest_host"
-  delegate_to: "{{ groups.proxmox_server[0] }}"
   

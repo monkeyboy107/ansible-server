@@ -21,7 +21,7 @@
 # Combine the disks that are being created with their ID number that will generate (it's a serial generation so I was able to determine what the next one is because it's just disk_ID +1 starting at 0 for the boot disk )
 - name: Combine disks with numbers
   set_fact:
-    disks_with_int: "{{ disks_with_int + [[disks_count, inner_item]]}}"
+    disks_with_int: "{{ disks_with_int + [disks_count, inner_item]}}"
     disks_count: "{{ disks_count | int + 1 }}"
   loop: "{{ guest_hosts.guest_host.hdd }}"
   delegate_to: "ihs-ansible-01"

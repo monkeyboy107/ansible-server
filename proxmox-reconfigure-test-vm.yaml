@@ -1,5 +1,5 @@
 - name: Add test VMs
-  hosts: ihs-test-host-01.ihs.org
+  hosts: test_hosts
   become: yes
   gather_facts: no
   vars:

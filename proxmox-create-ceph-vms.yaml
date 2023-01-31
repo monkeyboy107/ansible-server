@@ -1,1 +1,4 @@
 - name: Add ceph VMs
+  hosts: ceph_servers
+  become: yes
+  

@@ -29,6 +29,6 @@
 
 # Create disks
 - name: Create disks
-  shell: "pvesm alloc local-lvm {{ vm_name[guest_host[name]] }} '' {{ item.1 }}"
+  shell: "pvesm alloc local-lvm {{ vm_name[guest_host['name']] }} '' {{ item.1 }}"
   loop: "{{ disks_with_int }}"
   delegate_to: "{{ groups.proxmox_servers[0] }}"

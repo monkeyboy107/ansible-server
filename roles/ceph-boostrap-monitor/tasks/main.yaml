@@ -1,0 +1,31 @@
+---
+- name: Enable and start chroyd
+  systemd:
+    name: "chronyd"
+    state: "started"
+    enabled: true
+
+- name: Download cephadm
+  get_url:
+    url: "{{ cephadm_url }}"
+    dest: '{{ cephadm_path }}'
+
+- name: Pull images
+  podman_image:
+    name: "{{ item.name }}"
+    tag: "{{ item.tag }}"
+  loop: "{{ ceph_container }}"
+
+- name: Make cephadm executable
+  file:
+    path: "{{ cephadm_path }}"
+    mode: '+x'
+
+- name: Run commands
+  shell: "{{ item }}"
+  loop: "{{ commands }}"
+
+- name: Fetch the password file
+  fetch:
+    src: '/tmp/password'
+    dest: '/tmp/password'

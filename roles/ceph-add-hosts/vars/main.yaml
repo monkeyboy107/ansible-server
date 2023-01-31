@@ -1,0 +1,8 @@
+roles_with_nodes_dict: {mon: "{{ groups.ceph_monitors }}", mgr: "{{ groups.ceph_mgrs }}", _admin: "{{ groups.ceph_admins }}", osd: "{{ groups.ceph_osds }}", nfs: "{{ groups.ceph_nfs }}", rgw: "{{ groups.ceph_rgw }}", mds: "{{ groups.ceph_mds }}", iscsi: "{{ groups.ceph_iscsi }}"}
+roles_with_nodes_list: []
+roles_with_nodes: []
+commands:
+  - "{{ cephadm_path }} add-repo --release {{ ceph_release }}"
+  - "{{ cephadm_path }} install"
+  - "{{ cephadm_path }} bootstrap --mon-ip {{ ansible_default_ipv4.address }}>>/tmp/password"
+  - "{{ cephadm_path }} shell -- ceph orch apply osd --all-available-devices"

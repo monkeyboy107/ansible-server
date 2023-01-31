@@ -1,0 +1,8 @@
+ceph_monitors: {name: "", 'cores': 1, "sockets": 1, 'memory': 1024, hdd: ['1G']}
+ceph_osds:  {name: "", 'cores': 1, "sockets": 1, 'memory': 1024, hdd: ['2G']}
+ceph_admins: {name: "", 'cores': 1, "sockets": 1, 'memory': 4096, hdd: ['3G']} 
+ceph_mgrs: {name: "", 'cores': 1, "sockets": 1, 'memory': 1024, hdd: ['4G']}
+ceph_nfs: {name: "", 'cores': 1, "sockets": 1, 'memory': 1024, hdd: ['5G']}
+ceph_rgw: {name: "", 'cores': 1, "sockets": 1, 'memory': 1024, hdd: ['6G']}
+ceph_mds: {name: "", 'cores': 1, "sockets": 1, 'memory': 1024, hdd: ['7G']}
+ceph_iscsi: {name: "", 'cores': 1, "sockets": 1, 'memory': 1024, hdd: ['8G']}

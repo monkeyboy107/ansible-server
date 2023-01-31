@@ -1,0 +1,5 @@
+remote_user: ansible
+remote_group: "{{ remote_user }}"
+path_to_keys_as_list: 
+  - /etc/ansible/id_rsa.pub
+  - /home/isaac/.ssh/id_rsa.pub

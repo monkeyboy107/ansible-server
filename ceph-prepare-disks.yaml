@@ -1,0 +1,6 @@
+- name: Setup osds disks
+  hosts: ceph_osds
+  become: yes
+  gather_facts: yes
+  roles:
+    - ceph-prepare-disks

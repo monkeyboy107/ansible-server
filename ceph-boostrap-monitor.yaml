@@ -1,0 +1,16 @@
+- name: Install python
+  hosts: ceph_servers
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Install python
+      dnf:
+        name: "python3"
+        state: "present"
+
+- name: Setup monitor boostrap
+  hosts: ihs-ceph-admin-01.ihs.org
+  become: yes
+  gather_facts: yes
+  roles:
+    - ceph-boostrap-monitor

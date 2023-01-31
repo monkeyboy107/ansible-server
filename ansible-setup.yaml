@@ -1,0 +1,7 @@
+- name: Setup ansible
+  hosts: all
+  become: yes
+  remote_user: isaac
+  gather_facts: yes
+  roles:
+    - ansible-setup

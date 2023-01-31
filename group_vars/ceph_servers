@@ -1,0 +1,3 @@
+ceph_release: 'quincy'
+cephadm_url: 'https://github.com/ceph/ceph/raw/quincy/src/cephadm/cephadm'
+cephadm_path: '/tmp/cephadm'

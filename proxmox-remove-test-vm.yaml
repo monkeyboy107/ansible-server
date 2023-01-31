@@ -1,0 +1,13 @@
+- name: Remove ceph VMs
+  hosts: test_hosts
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Loop through ansible_hosts
+      include_role:
+        name: proxmox-remove-vm
+        apply: 
+          delegate_to: "ihs-ansible-01"
+      with_inventory_hostnames: "{{ play_hosts }}"
+      loop_control:
+        loop_var: "guest_host"

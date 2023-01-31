@@ -1,0 +1,5 @@
+---
+- name: Display reconfigure VM
+  debug:
+    msg: "{{ item }}"
+  loop: "{{ guest_host }}"

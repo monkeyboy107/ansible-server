@@ -1,0 +1,14 @@
+- name: Add ceph VMs
+  hosts: ceph_servers
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Loop through ansible_hosts
+      run_once: true
+      include_role:
+        name: proxmox-remove-vm
+        apply:
+          delegate_to: "{{ groups.proxmox_servers[0] }}"
+      with_inventory_hostnames: "{{ ansible_play_hosts_all }}"
+      loop_control:
+        loop_var: "guest_host"

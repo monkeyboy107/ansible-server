@@ -1,0 +1,21 @@
+---
+#- name: Load vars
+#  include_vars: roles/ansible-setup/vars/main.yaml
+
+- name: Add ansible user
+  user:
+    name: "{{ remote_user }}"
+#    groups: "{{ remote_group }}"
+    comment: Ansible automation user
+
+- name: Add ssh keys to ansible
+  ansible.posix.authorized_key:
+    user: "{{ remote_user }}"
+    state: present
+    key: "{{ lookup('file', '{{ item }}') }}"
+  loop: "{{ path_to_keys_as_list }}"
+
+- name: Setup ansible permissions
+  blockinfile:
+    path: /etc/sudoers
+    block: "%{{ remote_user }}    ALL=(ALL)       NOPASSWD: ALL"

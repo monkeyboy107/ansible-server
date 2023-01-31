@@ -1,0 +1,19 @@
+---
+- name: Register the results of qm list
+  shell: "qm list | awk '{print $2, $1}'"
+  register: vm_list
+  delegate_to: "{{ groups.proxmox_servers[0] }}"
+
+- name: Load varible with results from qm list
+  set_fact:
+    vm_name: "{{ vm_name | combine( {item.split(' ')[0]: item.split(' ')[1]} ) }}"
+  loop: "{{ vm_list.stdout_lines }}"
+  delegate_to: "ihs-ansible-01"
+
+- name: Power off VM
+  shell: "qm stop {{ vm_name[guest_host]}}"
+  delegate_to: "{{ groups.proxmox_servers[0] }}"
+
+- name: Remove VM
+  shell: "qm destroy {{ vm_name[guest_host] }} "
+  delegate_to: "{{ groups.proxmox_servers[0] }}"

@@ -1,0 +1,4 @@
+disks_count: "0"
+disks_count_string: "{{ disks_count }}"
+vm_name: {}
+disks_with_int: []

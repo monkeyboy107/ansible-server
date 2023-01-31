@@ -1,0 +1,6 @@
+- name: Setup monitors
+  hosts: ceph_servers
+  become: yes
+  gather_facts: yes
+  roles:
+    - ceph-add-hosts

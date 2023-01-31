@@ -1,0 +1,45 @@
+---
+- name: Fetch monitors ssh key
+  run_once: true
+  delegate_to: "{{ groups.ceph_admins[0] }}"
+  fetch:
+    src: '/etc/ceph/ceph.pub'
+    dest: '/tmp/{{ groups.ceph_admins[0] }}_ceph_public-key.pub'
+    flat: true
+
+- name: Add ssh keys to the other monitors
+  ansible.posix.authorized_key:
+    user: "root"
+    state: present
+    key: "{{ item }}"
+  with_file: '/tmp/{{ groups.ceph_admins[0] }}_ceph_public-key.pub'
+
+- name: Confirm that chronyd is running
+  systemd:
+    name: chronyd
+    state: "started"
+    enabled: true
+
+- name: Tell ceph that new nodes are part of the cluster
+  run_once: true
+  delegate_to: "{{ groups.ceph_admins[0] }}"
+  shell: "{{ cephadm_path }} shell -- ceph orch host add {{ item }} {{ hostvars[item]['ansible_default_ipv4']['address'] }}"
+  loop: "{{ play_hosts }}" 
+
+- name: Dict to list roles with node
+  run_once: true
+  set_fact:
+    roles_with_nodes_list: "{{ roles_with_nodes_list + [roles_with_nodes_dict[item] | zip_longest([item], fillvalue=item)]}}"
+  loop: "{{ roles_with_nodes_dict.keys() }}"
+
+- name: Assemble nodes with roles
+  run_once: true
+  set_fact:
+    roles_with_nodes: "{{ roles_with_nodes + item }}"
+  loop: "{{ roles_with_nodes_list }}"
+
+- name: Add the different roles to the nodes
+  run_once: true
+  delegate_to: "{{ groups.ceph_admins[0] }}"
+  shell: "cephadm shell -- ceph orch host label add {{ item[0] }} {{ item[1]}}"
+  loop: "{{ roles_with_nodes }}"

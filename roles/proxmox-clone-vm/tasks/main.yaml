@@ -1,11 +1,11 @@
 ---
-- name: Retrieve every VMID
-  shell: "qm list | awk {'print $1'}"
-  register: all_VMIDs
-  delegate_to: "{{ groups.proxmox_servers[0] }}"
-
-- name: Breaking into block
+- name: Breaking into block to easily loop
   block:
+  - name: Retrieve every VMID
+    shell: "qm list | awk {'print $1'}"
+    register: all_VMIDs
+    delegate_to: "{{ groups.proxmox_servers[0] }}"
+
   - name: Check next VMID in list
     loop: "{{ all_VMIDs.stdout_lines }}"
     set_fact:

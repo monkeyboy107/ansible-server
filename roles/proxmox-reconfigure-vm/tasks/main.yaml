@@ -1,5 +1,9 @@
 ---
-- name: Display reconfigure VM
+- name: Register the results of qm list
+  shell: "qm list | awk '{print $2, $1}'"
+  register: vm_list
+ 
+- name: Loop vm_list
   debug:
     msg: "{{ item }}"
-  loop: "{{ guest_host }}"
+  loop: "{{ vm_list }}"

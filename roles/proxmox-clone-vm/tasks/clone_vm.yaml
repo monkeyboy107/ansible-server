@@ -1,6 +1,6 @@
 ---
 - name: Retrieve every VMID
-  shell: "qm list | awk {'print $1 "{{ space_with_quotes }}" $2'}"
+  shell: "qm list | awk {'print $1 {{ space_with_quotes }} $2'}"
   register: all_VMIDs
   delegate_to: "{{ groups.proxmox_servers[0] }}"
 

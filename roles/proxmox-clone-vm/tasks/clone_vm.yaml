@@ -5,7 +5,7 @@
   delegate_to: "{{ groups.proxmox_servers[0] }}"
 
 - name: Check if VMID is avalible
-  loop: "{{ guest_host }}"
+  loop: "{{ ansible_play_hosts_all }}"
   set_fact:
     vmid_start: "{{ vmid_start | int + 1 }}"
     vmid_list: "{{ vmid_list + [vmid_start]}}"
@@ -23,4 +23,4 @@
 - name: Clone VM
   shell: "qm clone {{ rocky_8_cloud_init_vmid }} {{ item.1 }} --name {{ item.0 }}"
   delegate_to: "{{ groups.proxmox_servers[0] }}"
-  loop: "{{ ansible_play_hosts_all | zip(vmid_list) }}"
+  loop: "{{ ansible_play_hosts_all  | zip(vmid_list) }}"

@@ -2,5 +2,5 @@
 - name: Clone the VMs
   loop: "{{ ansible_play_hosts }}"
   loop_control:
-    loop_var: "guest_hsot"
+    loop_var: "guest_host"
   include_tasks: "clone_vm.yaml"

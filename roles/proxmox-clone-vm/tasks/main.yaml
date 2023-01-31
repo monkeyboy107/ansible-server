@@ -4,3 +4,4 @@
   loop_control:
     loop_var: "guest_host"
   include_tasks: "clone_vm.yaml"
+  when: inventory_hostname == guest_host

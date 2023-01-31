@@ -6,7 +6,7 @@
 
 - name: Make dict of VMIDs with hostnames
   set_fact:
-    all_VMIDs_dict: {{ all_VMIDs_dict | combine() }}
+    all_VMIDs_dict: "{{ all_VMIDs_dict | combine() }}"
 
 - name: Check if VMID is avalible
   loop: "{{ ansible_play_hosts }}"

@@ -3,6 +3,6 @@
   become: yes
   gather_facts: no
   vars:
-    - guest_host: [{name: "test-vm.ihs.org", 'cores': 4, 'memory': 10240, 'sockets': 4, hdd: ['1G']}]
+    - guest_hosts: [{name: "test-vm.ihs.org", 'cores': 4, 'memory': 10240, 'sockets': 4, hdd: ['1G']}]
   roles:
     - proxmox-reconfigure-vm

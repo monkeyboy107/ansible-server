@@ -1,22 +1,7 @@
 ---
-- name: Breaking into block to easily loop
-  block:
-  - name: Retrieve every VMID
-    shell: "qm list | awk {'print $1'}"
-    register: all_VMIDs
-    delegate_to: "{{ groups.proxmox_servers[0] }}"
-
-  - name: Check next VMID in list
-    loop: "{{ all_VMIDs.stdout_lines }}"
-    set_fact:
-      ansible_ID_start: "{{ ansible_ID_start | int + 1}}"
-#    until:  item  != ansible_ID_start
-    until: item is not in all_VMIDs
-    retries: 1000
-    delay: 1
-    delegate_to: "ihs-ansible-01"
-
-  - name: Clone VM
-    shell: "qm clone {{ rocky_8_cloud_init_vmid }} {{ ansible_ID_start }} --name {{ item }}"
-    delegate_to: "{{ groups.proxmox_servers[0] }}"
+- name: Clone the VMs
   loop: "{{ ansible_play_hosts }}"
+  loop_control:
+    loop_var: "guest_hsot"
+  include_tasks: 
+    name: "clone_vm.yaml"

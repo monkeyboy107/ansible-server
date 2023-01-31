@@ -1,4 +1,7 @@
 - name: Add ceph VMs
   hosts: ceph_servers
   become: yes
-  
+  tasks:
+   - name: Create the VMs
+     import_role:
+       name: proxmox-clone-vm

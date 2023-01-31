@@ -1,6 +1,7 @@
 - name: Add ceph VMs
   hosts: ceph_servers
   become: yes
+  gather_facts: no
   tasks:
    - name: Create the VMs
      import_role:

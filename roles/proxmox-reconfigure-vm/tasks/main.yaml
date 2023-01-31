@@ -2,8 +2,13 @@
 - name: Register the results of qm list
   shell: "qm list | awk '{print $2, $1}'"
   register: vm_list
- 
-- name: Loop vm_list
+
+- name: Load varible with results from qm list
+  set_fact:
+    vm_name: "{{ vm_name | combine( {item.split(' ')[0]: item.split(' ')[1]} ) }}"
+  loop: "{{ vm_list.stdout_lines }}"
+
+- name: List vm_name
   debug:
     msg: "{{ item }}"
-  loop: "{{ vm_list.stdout_lines }}"
+  loop: "{{ vm_name }}"

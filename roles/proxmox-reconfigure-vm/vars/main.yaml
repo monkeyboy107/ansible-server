@@ -1,2 +1,3 @@
 disks_count: "0"
+disks_with_int: {{ disks_count}}
 vm_name: {}

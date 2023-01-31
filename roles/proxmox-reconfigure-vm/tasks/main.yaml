@@ -20,7 +20,7 @@
 
 # Divides the next section for if disks are requested
 - name: Add disks
-  include_task: block_storage.yaml
+  import_task: block_storage.yaml
   loop: "{{ guest_hosts.keys() }}"
   loop_control:
     loop_var: "guest_host"

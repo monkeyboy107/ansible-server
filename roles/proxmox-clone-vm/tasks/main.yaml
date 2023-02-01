@@ -12,15 +12,18 @@
     all_VMIDs_dict: "{{ all_VMIDs_dict | combine({item.split(' ')[0]: item.split(' ')[1]} ) }}"
   loop: "{{ all_VMIDs.stdout_lines }}"
 
+- name: Generate VMIDs and append a list
+  import_task: increment_vmid_couner.yaml
+
 # Generateds the VMIDs and appens a list
 # I want this to be able to increment the vmid_start inorder to generate a unique VMID
 # Currently unsure how to increament vmid_start without appending ID_list
-- name: Geneate unique ID for each VM into a list
-  set_fact:
-    ID_list: "{{ ID_list + [vmid_start] }}"
-    vmid_start: "{{ vmid_start | int + 1}}"
+# - name: Geneate unique ID for each VM into a list
+#  set_fact:
+#    ID_list: "{{ ID_list + [vmid_start] }}"
+#    vmid_start: "{{ vmid_start | int + 1}}"
 #  until: "{{ ID_list | length == ansible_play_hosts | length}}"
-  loop: "{{ ansible_play_hosts }}"
+#  loop: "{{ ansible_play_hosts }}"
 #  when: "{{ vmid_start | string is not in all_VMIDs_dict.keys() }}"
 
 # Zips the VMIDs with the hosts

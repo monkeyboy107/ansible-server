@@ -15,6 +15,10 @@
      set_fact:
        guest_hosts: "{{ guest_hosts + [ceph_specs[item] | combine({'name': inventory_hostname}) ]}}"
      
-   - name: Configure servers intially from baseline defaults
+   - name: Configure VMs intially from baseline defaults
      import_role:
        name: proxmox-reconfigure-vm
+   
+   - name: Start VMs
+     import_role:
+       name: proxmox-start-vm

@@ -13,17 +13,9 @@
   set_fact:
     ID_list: "{{ ID_list + [vmid_start] }}"
     vmid_start: "{{ vmid_start | int + 1}}"
-  until: "{{ ID_list | length == ansible_play_hosts | length}}"
+#  until: "{{ ID_list | length == ansible_play_hosts | length}}"
   loop: "{{ ansible_play_hosts }}"
 #  when: "{{ vmid_start | string is not in all_VMIDs_dict.keys() }}"
-
-- name: Display ID_list and ansible_play_hosts
-  run_once: true
-  debug:
-    msg: "{{ item }}"
-  loop:
-    - "{{ ID_list }}"
-    - "{{ ansible_play_hosts }}"
 
 - name: Assign unique ID for each VM
   set_fact:

@@ -27,4 +27,3 @@
   loop: "{{ guest_hosts }}"
   loop_control:
     loop_var: "guest_host"
-  

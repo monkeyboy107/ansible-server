@@ -9,7 +9,7 @@
         state: "present"
 
 - name: Setup monitor boostrap
-  hosts: ihs-ceph-admin-01.ihs.org
+  hosts: ceph_monitors[0]
   become: yes
   gather_facts: yes
   roles:

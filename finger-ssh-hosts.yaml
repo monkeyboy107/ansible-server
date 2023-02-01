@@ -9,11 +9,6 @@
         path: "~/.ssh/known_hosts"
         state: "absent"
 
-    - name: Show fingered remote ssh hosts
-      debug: 
-        msg: "echo -n {{ item }}>>~/.ssh/known_hosts ; ssh-keyscan -H {{ item }}>>~/.ssh/known_hosts"
-      with_inventory_hostnames: "all"
-
     - name: Finger remote ssh hosts
       shell: "echo -n {{ item }}>>~/.ssh/known_hosts ; ssh-keyscan -H {{ item }}>>~/.ssh/known_hosts"
       with_inventory_hostnames: "all"

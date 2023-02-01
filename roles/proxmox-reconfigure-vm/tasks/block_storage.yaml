@@ -35,5 +35,6 @@
 
 # Attch the disk to the VM
 - name: Attach the disk
-  shell: "qm set {{ vm_name[guest_host['name']] }} --scsihw virtio-scsi-pci --scsi1 local-lvm:vm-{{ vm_name[guest_host['name']] }}-disk-{{ item.0 }}"
+  shell: "qm set {{ vm_name[guest_host['name']] }} --scsihw virtio-scsi-pci --scsi1 local-lvm:vm-{{ vm_name[guest_host['name']]	 }}-disk-{{ item.0 }}"
   loop: "{{ disks_with_int }}"
+  delegate_to: "{{ groups.proxmox_servers[0] }}"

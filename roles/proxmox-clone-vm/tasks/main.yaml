@@ -13,6 +13,7 @@
   loop: "{{ all_VMIDs.stdout_lines }}"
 
 - name: Generate VMIDs and append a list
+  run_once: true
   include_tasks: increment_vmid_counter.yaml
   loop: "{{ ansible_play_hosts }}"
   loop_control:

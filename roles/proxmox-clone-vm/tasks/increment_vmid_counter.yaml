@@ -11,6 +11,12 @@
   set_fact:
     ID_list: "{{ ID_list + [vmid_start] }}"
 
+# Zips the VMIDs with the hosts
+- name: Assign unique ID for each VM
+  set_fact:
+    all_VMIDs_dict: "{{ all_VMIDs_dict | combine( {item.0: item.1} ) }}"
+  loop: "{{ ID_list | zip(ansible_play_hosts) }}"
+
 # Calls itself
 - name: Recheck vmid
   when: "{{ vmid_start | string is in all_VMIDs_dict.keys() }}"

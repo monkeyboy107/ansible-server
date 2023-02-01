@@ -1,0 +1,5 @@
+[all]
+ihs-ansible-01 
+
+[test_hosts]
+ihs-test-host-01.ihs.org

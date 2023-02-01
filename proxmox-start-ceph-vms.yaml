@@ -1,0 +1,11 @@
+- name: Add ceph VMs
+  hosts: ceph_servers
+  become: yes
+  gather_facts: no
+  serial: 3
+  vars:
+    - guest_hosts: []
+  tasks:
+     - name: Start VMs
+     import_role:
+       name: proxmox-start-vm

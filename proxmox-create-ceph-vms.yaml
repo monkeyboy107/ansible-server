@@ -2,24 +2,12 @@
   hosts: ceph_servers
   become: yes
   gather_facts: no
-  serial: 3
-  vars:
-    - guest_hosts: []
   tasks:
-   - name: Create the VMs
-     import_role:
-       name: proxmox-clone-vm
-   
-   - name: Assigning guest_hosts
-     loop: "{{ ceph_specs.keys() | list }}"
-     when: inventory_hostname is in groups[item]
-     set_fact:
-       guest_hosts: "{{ guest_hosts + [ceph_specs[item] | combine({'name': inventory_hostname}) ]}}"
-     
-   - name: Configure VMs intially from baseline defaults
-     import_role:
-       name: proxmox-reconfigure-vm
-   
-   - name: Start VMs
-     import_role:
-       name: proxmox-start-vm
+  - name: Clone the ceph vm
+    import_playbooks: proxmox-clone-ceph-vms.yaml
+  
+  - name: Configure the ceph vms
+    import_playbooks: proxmox-configure-ceph-vms.yaml
+  
+  - name: Start ceph vms
+    import_playbook: Start the ceph vms

@@ -6,6 +6,6 @@
   vars:
     - guest_hosts: []
   tasks:
-     - name: Start VMs
-     import_role:
-       name: proxmox-start-vm
+    - name: Start VMs
+      import_role:
+        name: proxmox-start-vm

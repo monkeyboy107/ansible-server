@@ -5,24 +5,13 @@
   set_fact:
     vmid_start: "{{ vmid_start | int + 1 }}"
 
-# Calls itself
-- name: Recheck vmid
-  when: "{{ vmid_start | string is not in all_VMIDs_dict.keys() }}"
-  include_tasks: increment_vmid_counter.yaml
-
 # Appends the vmid to ID_list
 - name: Apend ID_list
   when: "{{ vmid_start | string is not in all_VMIDs_dict.keys() }}"
   set_fact:
     ID_list: "{{ ID_list + [vmid_start] }}"
 
-- name: Is vmid "{{ vmid_start }}" avalible
-  when: vmid_start | string is in all_VMIDs_dict.keys()
-  set_fact:
-    vmid_start: "{{ vmid_start | int + 1 }}"
-
 # Calls itself
 - name: Recheck vmid
   when: "{{ vmid_start | string is not in all_VMIDs_dict.keys() }}"
   include_tasks: increment_vmid_counter.yaml
-

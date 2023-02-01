@@ -9,4 +9,4 @@ ceph_nfs: {name: "", 'cores': 1, "sockets": 1, 'memory': 1024, hdd: []}
 ceph_rgw: {name: "", 'cores': 1, "sockets": 1, 'memory': 1024, hdd: []}
 ceph_mds: {name: "", 'cores': 1, "sockets": 1, 'memory': 1024, hdd: []}
 ceph_iscsi: {name: "", 'cores': 1, "sockets": 1, 'memory': 1024, hdd: []}
-ceph_specs: {ceph_osds: "ceph_monitors: {{ ceph_monitors }}, {{ ceph_osds }}", ceph_admins: "{{ ceph_admins }}", ceph_mgrs: "{{ ceph_mgrs }}", ceph_nfs: "{{ ceph_nfs }}", ceph_rgw: "{{ ceph_rgw }}", ceph_mds: "{{ ceph_mds }}", ceph_iscsi: "{{ ceph_iscsi }}"}
+ceph_specs: {"ceph_monitors: {{ ceph_monitors }}, ceph_osds: {{ ceph_osds }}", ceph_admins: "{{ ceph_admins }}", ceph_mgrs: "{{ ceph_mgrs }}", ceph_nfs: "{{ ceph_nfs }}", ceph_rgw: "{{ ceph_rgw }}", ceph_mds: "{{ ceph_mds }}", ceph_iscsi: "{{ ceph_iscsi }}"}

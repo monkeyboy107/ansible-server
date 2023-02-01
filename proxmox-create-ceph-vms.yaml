@@ -9,6 +9,11 @@
      import_role:
        name: proxmox-clone-vm
    
+   - name: List inventory_hostname
+     debug:
+       msg: "{{ item }}"
+     loop: "{{ ceph_specs.keys() | list }}"
+   
    - name: Assigning guest_hosts
      loop: "{{ ceph_specs.keys() | list }}"
      when: inventory_hostname is in groups[item]

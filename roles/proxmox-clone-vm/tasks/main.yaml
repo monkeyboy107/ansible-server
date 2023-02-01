@@ -15,6 +15,8 @@
 - name: Generate VMIDs and append a list
   include_tasks: increment_vmid_counter.yaml
   loop: "{{ ansible_play_hosts }}"
+  loop_control:
+    loop_var: guest_host
 
 # Generateds the VMIDs and appens a list
 # I want this to be able to increment the vmid_start inorder to generate a unique VMID

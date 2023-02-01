@@ -1,20 +1,23 @@
 ---
 - name: Retrieve every VMID
+  run_once: true
   shell: "qm list | awk {'print $1, $2'}"
   register: all_VMIDs
   delegate_to: "{{ groups.proxmox_servers[0] }}"
 
 - name: Make dict of VMIDs with hostnames
+  run_once: true
   set_fact:
     all_VMIDs_dict: "{{ all_VMIDs_dict | combine({item.split(' ')[0]: item.split(' ')[1]} ) }}"
   loop: "{{ all_VMIDs.stdout_lines }}"
 
 - name: Check if VMID is avalible
+  run_once: true
   loop: "{{ ansible_play_hosts }}"
   set_fact:
     vmid_start: "{{ vmid_start | int + 1 }}"
     all_VMIDs: "{{ all_VMIDs | combine( {vmid_start: item} ) }}"
-  when: "{{ vmid_start | string is not in all_VMIDs.stdout }}"
+  when: "{{ vmid_start | string is not in all_VMIDs.keys() }}"
 #  until: "{{ ansible_play_hosts_all | length == vmid_list | length }}"
 
 #- name: Check next VMID in list
@@ -25,8 +28,13 @@
 #  until: item is not in all_VMIDs
 #  delegate_to: "ihs-ansible-01"
 
+- name: Display all_VMIDs_dict
+  debug:
+    msg: "{{ all_VMIDs_dict }}"
+
 - name: Clone VM
-  shell: "qm clone {{ rocky_8_cloud_init_vmid }} {{ all_VMIDs.stdout }} --name {{ all_VMIDs[item] }}"
+  run_once: true
+  shell: "qm clone {{ rocky_8_cloud_init_vmid }} {{ item }} --name {{ all_VMIDs_dict[item] }}"
   delegate_to: "{{ groups.proxmox_servers[0] }}"
-  loop: "{{ all_VMIDs.stdout_lines }}"
-  when: all_VMIDs[item] is in ansible_play_hosts
+  loop: "{{ all_VMIDs_dict | keys }}"
+  when: all_VMIDs_dict[item] is in ansible_play_hosts

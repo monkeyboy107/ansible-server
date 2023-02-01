@@ -2,6 +2,8 @@
   hosts: ceph_servers
   become: yes
   gather_facts: no
+  vars:
+    - guest_hosts: []
   tasks:
    - name: Assigning guest_hosts
      loop: "{{ ceph_specs.keys() | list }}"

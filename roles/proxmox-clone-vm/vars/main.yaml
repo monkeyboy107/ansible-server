@@ -1,6 +1,5 @@
 rocky_8_cloud_init_vmid: 10000
 vmid_start: 4000
 vmid_list: []
-space_with_quotes: "' '"
 all_VMIDs_dict: {}
 ID_list: []

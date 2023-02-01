@@ -7,23 +7,23 @@ ihs-ceph-monitor-[01:05].ihs.org
 [ceph_osds]
 ihs-ceph-osd-[01:02].ihs.org
 
-[ceph_admins:children]
-ceph_monitors
+[ceph_admins]
+ihs-ceph-admin-[01:02].ihs.org
 
-[ceph_mgrs:children]
-ceph_monitors
+[ceph_mgrs]
+ihs-ceph-mgr-[01:02].ihs.org
 
-[ceph_nfs:children]
-ceph_osds
+[ceph_nfs]
+ihs-ceph-nfs-[01:02].ihs.org
 
-[ceph_rgw:children]
-ceph_osds
+[ceph_rgw]
+ihs-ceph-rgw-[01:02].ihs.org
 
-[ceph_mds:children]
-ceph_osds
+[ceph_mds]
+ihs-ceph-mds-[01:02].ihs.org
 
-[ceph_iscsi:children]
-ceph_osds
+[ceph_iscsi]
+ihs-ceph-iscsi-[01:02].ihs.org
 
 [ceph_servers:children]
 ceph_monitors

@@ -31,8 +31,7 @@
   loop: "{{ ID_list | zip(ansible_play_hosts) }}"
 
 - name: Clone the VMs
-#  loop: "{{ ansible_play_hosts }}"
-#  loop_control:
-#    loop_var: "guest_host"
+  loop: "{{ ansible_play_hosts }}"
+  loop_control:
+    loop_var: "guest_host"
   include_tasks: "clone_vm.yaml"
-#  when: inventory_hostname == guest_host

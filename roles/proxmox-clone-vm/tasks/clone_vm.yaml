@@ -4,4 +4,4 @@
   shell: "qm clone {{ rocky_8_cloud_init_vmid }} {{ item }} --name {{ all_VMIDs_dict[item] }}"
   delegate_to: "{{ groups.proxmox_servers[0] }}"
   loop: "{{ all_VMIDs_dict.keys() }}"
-  when: all_VMIDs_dict[item] is in ansible_play_hosts
+  when: all_VMIDs_dict[item] == guest_host

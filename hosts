@@ -11,7 +11,7 @@ ihs-ceph-osd-[01:02].ihs.org
 ihs-ceph-admin-[01:02].ihs.org
 
 [ceph_mgrs]
-ihs-ceph-mgrs-[01:03].ihs.org
+ihs-ceph-mgr-[01:03].ihs.org
 
 [ceph_nfs]
 ihs-ceph-nfs-[01:02].ihs.org

@@ -1,14 +1,20 @@
 ---
+# Gets the VMIDs from proxmox
 - name: Retrieve every VMID
   shell: "qm list | awk {'print $1, $2'}"
   register: all_VMIDs
   delegate_to: "{{ groups.proxmox_servers[0] }}"
 
+# I wanted a dict so I can make for damn sure that the vmids aren't overlapping.
+# I prefer a single VM to be able to deploy than no VM deploy 
 - name: Make dict of VMIDs with hostnames
   set_fact:
     all_VMIDs_dict: "{{ all_VMIDs_dict | combine({item.split(' ')[0]: item.split(' ')[1]} ) }}"
   loop: "{{ all_VMIDs.stdout_lines }}"
 
+# Generateds the VMIDs and appens a list
+# I want this to be able to increment the vmid_start inorder to generate a unique VMID
+# Currently unsure how to increament vmid_start without appending ID_list
 - name: Geneate unique ID for each VM into a list
   set_fact:
     ID_list: "{{ ID_list + [vmid_start] }}"
@@ -17,11 +23,14 @@
   loop: "{{ ansible_play_hosts }}"
 #  when: "{{ vmid_start | string is not in all_VMIDs_dict.keys() }}"
 
+# Zips the VMIDs with the hosts
 - name: Assign unique ID for each VM
   set_fact:
     all_VMIDs_dict: "{{ all_VMIDs_dict | combine( {item.0: item.1} ) }}"
   loop: "{{ ID_list | zip(ansible_play_hosts) }}"
 
+# Actually clone the VM
+# Im looping to get some idea of progress
 - name: Clone the VMs
   loop: "{{ ansible_play_hosts }}"
   loop_control:

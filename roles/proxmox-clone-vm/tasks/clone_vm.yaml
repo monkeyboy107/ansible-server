@@ -1,4 +1,5 @@
 ---
+# Clones the VM
 - name: Clone VM
   run_once: true
   shell: "qm clone {{ rocky_8_cloud_init_vmid }} {{ item }} --name {{ all_VMIDs_dict[item] }}"

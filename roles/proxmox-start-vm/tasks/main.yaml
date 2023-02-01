@@ -27,7 +27,7 @@
 - name: Wait for VM to start
   delegate_to: "ihs-ansible-01"
   wait_for:
-    host: "{{ item }}"
+    host: "{{ inventory_hostname }}"
 #    delay: "{{ delay_for_boot }}"
     port: 22
     sleep: 10

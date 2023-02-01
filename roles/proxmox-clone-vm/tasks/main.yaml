@@ -13,7 +13,7 @@
   loop: "{{ all_VMIDs.stdout_lines }}"
 
 - name: Generate VMIDs and append a list
-  include_tasks: increment_vmid_couner.yaml
+  include_tasks: increment_vmid_counter.yaml
 
 # Generateds the VMIDs and appens a list
 # I want this to be able to increment the vmid_start inorder to generate a unique VMID

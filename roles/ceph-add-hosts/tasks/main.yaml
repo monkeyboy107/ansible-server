@@ -43,3 +43,9 @@
   delegate_to: "{{ groups.ceph_admins[0] }}"
   shell: "cephadm shell -- ceph orch host label add {{ item[0] }} {{ item[1]}}"
   loop: "{{ roles_with_nodes }}"
+
+- name: Assign daemons according to the label
+  run_once: true
+  delegate_to: "{{ groups.ceph_admins[0]"
+  shell: "cephadm shell -- ceph orch apply {{ item[1] }} label:{{ item[1] }}"
+  loop: "{{ roles_with_nodes }}"

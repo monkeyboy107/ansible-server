@@ -1,7 +1,0 @@
-disks_in_use: []
-disks_in_use2: []
-disks_all: []
-disks_not_in_use: []
-unusable_disks:
-  - sr0
-  - sr1

@@ -13,5 +13,5 @@
 
 # Calls itself
 - name: Recheck vmid
-  when: "{{ vmid_start | string is not in all_VMIDs_dict.keys() }}"
+  when: "{{ vmid_start | string is in all_VMIDs_dict.keys() }}"
   include_tasks: increment_vmid_counter.yaml

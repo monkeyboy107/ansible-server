@@ -8,7 +8,7 @@
 # Calls itself
 - name: Recheck vmid
   when: vmid_start | string is not in all_VMIDs_dict.keys
-  import_task: increment_vmid_couner.yaml
+  include_tasks: increment_vmid_couner.yaml
 
 # Appends the vmid to ID_list
 - name: Apend ID_list
@@ -23,5 +23,5 @@
 # Calls itself
 - name: Recheck vmid
   when: vmid_start | string is not in all_VMIDs_dict.keys
-  import_task: increment_vmid_couner.yaml
+  include_tasks: increment_vmid_couner.yaml
 

@@ -3,7 +3,7 @@
 - name: Is vmid "{{ vmid_start }}" avalible
   when: vmid_start | string is in all_VMIDs_dict.keys()
   set_fact:
-    vmid_start: {{ vmid_start | int + 1 }}
+    vmid_start: "{{ vmid_start | int + 1 }}"
 
 # Calls itself
 - name: Recheck vmid
@@ -18,7 +18,7 @@
 - name: Is vmid "{{ vmid_start }}" avalible
   when: vmid_start | string is in all_VMIDs_dict.keys()
   set_fact:
-    vmid_start: {{ vmid_start | int + 1 }}
+    vmid_start: "{{ vmid_start | int + 1 }}"
 
 # Calls itself
 - name: Recheck vmid

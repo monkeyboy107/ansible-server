@@ -1,24 +1,50 @@
 ---
 - name: Retrieve every VMID
-  run_once: true
   shell: "qm list | awk {'print $1, $2'}"
   register: all_VMIDs
   delegate_to: "{{ groups.proxmox_servers[0] }}"
 
 - name: Make dict of VMIDs with hostnames
-  run_once: true
   set_fact:
     all_VMIDs_dict: "{{ all_VMIDs_dict | combine({item.split(' ')[0]: item.split(' ')[1]} ) }}"
   loop: "{{ all_VMIDs.stdout_lines }}"
 
-- name: Check if VMID is avalible
-  run_once: true
-  loop: "{{ ansible_play_hosts }}"
+- name: Geneate unique ID for each VM into a list
   set_fact:
-    vmid_start: "{{ vmid_start | int + 1 }}"
-    all_VMIDs: "{{ all_VMIDs | combine( {vmid_start: item} ) }}"
-  when: "{{ vmid_start | string is not in all_VMIDs.keys() }}"
-#  until: "{{ ansible_play_hosts_all | length == vmid_list | length }}"
+    ID_list: "{{ ID_list + [vmid_start] }}"
+    vmid_start: "{{ vmid_start | int + 1}}"
+#  until: "{{ ID_list | length >= ansible_play_hosts | length}}"
+  loop: "{{ ansible_play_hosts }}"
+  when: "{{ vmid_start | string is not in all_VMIDs_dict.keys() }}"
+
+- name: Display ID_list and ansible_play_hosts
+  run_once: true
+  debug:
+    msg: "{{ item }}"
+  loop:
+    - "{{ ID_list }}"
+    - "{{ ansible_play_hosts }}"
+
+- name: Assign unique ID for each VM
+  set_fact:
+    all_VMIDs_dict: "{{ all_VMIDs_dict | combine( {item.0: item.1} ) }}"
+  loop: "{{ ID_list | zip(ansible_play_hosts) }}"
+
+#- name: Get unique ID for each VM
+#  loop: "{{ guest_hosts }}"
+#  set_fact:
+#    guest_hosts: "{{ guest_hosts | difference(item) }}"
+#    all_VMIDs_dict: "{{ all_VMIDs | combine( {vmid_start: item} ) }}"
+#    vmid_start: "{{ vmid_start | int + 1 }}"
+#  when: "{{ vmid_start | string is not in all_VMIDs_dict.keys() }}"
+
+#- name: Check if VMID is avalible
+#  run_once: true
+#  loop: "{{ ansible_play_hosts }}"
+#  set_fact:
+#    vmid_start: "{{ vmid_start | int + 1 }}"
+#    all_VMIDs_dict: "{{ all_VMIDs | combine( {vmid_start: item} ) }}"
+#  when: "{{ vmid_start | string is not in all_VMIDs_dict.keys() }}"
 
 #- name: Check next VMID in list
 #  loop: "{{ all_VMIDs.stdout_lines }}"
@@ -27,10 +53,6 @@
 #  until:  item  != ansible_ID_start
 #  until: item is not in all_VMIDs
 #  delegate_to: "ihs-ansible-01"
-
-- name: Display all_VMIDs_dict
-  debug:
-    msg: "{{ all_VMIDs_dict }}"
 
 - name: Clone VM
   run_once: true

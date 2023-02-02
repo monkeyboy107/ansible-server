@@ -41,5 +41,3 @@ proxmox_servers
 [proxmox_servers]
 ihs-hypervisor-01 ansible_remote_tmp=/tmp/.ansible/tmp
 
-[test_hosts]
-ihs-test-host-01.ihs.org

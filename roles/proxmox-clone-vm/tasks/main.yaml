@@ -19,6 +19,12 @@
   loop_control:
     loop_var: guest_host
 
+# Zips the VMIDs with the hosts
+- name: Assign unique ID for each VM
+  set_fact:
+    all_VMIDs_dict: "{{ all_VMIDs_dict | combine( {item.0: item.1} ) }}"
+  loop: "{{ ID_list | zip(ansible_play_hosts) }}"
+
 # Generateds the VMIDs and appens a list
 # I want this to be able to increment the vmid_start inorder to generate a unique VMID
 # Currently unsure how to increament vmid_start without appending ID_list

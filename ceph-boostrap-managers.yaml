@@ -1,0 +1,16 @@
+- name: Install python
+  hosts: ceph_servers
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Install python
+      dnf:
+        name: "python3"
+        state: "present"
+
+- name: Setup adnin boostrap
+  hosts: ceph_admin[0]
+  become: yes
+  gather_facts: yes
+  roles:
+    - ceph-boostrap-monitor

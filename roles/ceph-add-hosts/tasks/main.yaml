@@ -1,13 +1,13 @@
 ---
-- name: Fetch monitors ssh key
+- name: Fetch admin ssh key
   run_once: true
-  delegate_to: "{{ groups.ceph_admins[0] }}"
+  delegate_to: "{{ groups.ceph_admin[0] }}"
   fetch:
     src: '/etc/ceph/ceph.pub'
     dest: '/tmp/{{ groups.ceph_admins[0] }}_ceph_public-key.pub'
     flat: true
 
-- name: Add ssh keys to the other monitors
+- name: Add ssh keys to the other hosts
   ansible.posix.authorized_key:
     user: "root"
     state: present

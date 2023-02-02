@@ -9,8 +9,8 @@
         state: "present"
 
 - name: Setup adnin boostrap
-  hosts: ceph_admin[0]
+  hosts: ceph_admins[0]
   become: yes
   gather_facts: yes
   roles:
-    - ceph-boostrap-monitor
+    - ceph-boostrap-managers

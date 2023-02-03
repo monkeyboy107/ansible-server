@@ -4,3 +4,4 @@ vmid_list: []
 all_VMIDs_dict: {}
 ID_list: []
 full_vms: true
+full_vms_set: ''

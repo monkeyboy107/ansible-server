@@ -2,7 +2,7 @@ ceph_release: 'quincy'
 cephadm_url: 'https://github.com/ceph/ceph/raw/quincy/src/cephadm/cephadm'
 cephadm_path: '/tmp/cephadm'
 ceph_monitors: {name: "", 'cores': 2, "sockets": 2, 'memory': 8192, hdd: []}
-ceph_osds:  {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: ['20G', '20G']}
+ceph_osds:  {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: ['20G']}
 ceph_admins: {name: "", 'cores': 2, "sockets": 2, 'memory': 8192, hdd: []} 
 ceph_mgrs: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: []}
 ceph_nfs: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: []}

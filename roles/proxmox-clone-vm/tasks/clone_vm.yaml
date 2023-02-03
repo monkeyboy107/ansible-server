@@ -1,8 +1,13 @@
 ---
+- name: Check if full clone is set
+  when: "{{ full_vms }}"
+  set_fact:
+    full_vms_set: "--full"
+
 # Clones the VM
 - name: Clone VM
   run_once: true
-  shell: "qm clone {{ rocky_8_cloud_init_vmid }} {{ item }} --name {{ all_VMIDs_dict[item] }} --full"
+  shell: "qm clone {{ rocky_8_cloud_init_vmid }} {{ item }} --name {{ all_VMIDs_dict[item] }} {{ full_vms_set }}"
   delegate_to: "{{ groups.proxmox_servers[0] }}"
   loop: "{{ all_VMIDs_dict.keys() }}"
   when: all_VMIDs_dict[item] == guest_host

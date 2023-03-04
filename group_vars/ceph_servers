@@ -1,5 +1,5 @@
 ceph_release: 'quincy'
-cephadm_url: 'https://github.com/ceph/ceph/raw/quincy/src/cephadm/cephadm'
+cephadm_url: 'https://github.com/ceph/ceph/raw/quincy-release/src/cephadm/cephadm'
 cephadm_path: '/tmp/cephadm'
 ceph_monitors: {name: "", 'cores': 2, "sockets": 2, 'memory': 8192, hdd: []}
 ceph_osds:  {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: ['20G']}

@@ -2,28 +2,28 @@
 ihs-ansible-01 
 
 [ceph_monitors]
-ihs-ceph-monitor-[01:05].ihs.org
+ihs-ceph-monitor-[01:05].monkeyboy107.com
 
 [ceph_osds]
-ihs-ceph-osd-[01:03].ihs.org
+ihs-ceph-osd-[01:03].monkeyboy107.com
 
 [ceph_admins]
-ihs-ceph-admin-[01:02].ihs.org
+ihs-ceph-admin-[01:02].monkeyboy107.com
 
 [ceph_mgrs]
-ihs-ceph-mgr-[01:02].ihs.org
+ihs-ceph-mgr-[01:02].monkeyboy107.com
 
 [ceph_nfs]
-ihs-ceph-nfs-[01:02].ihs.org
+ihs-ceph-nfs-[01:02].monkeyboy107.com
 
 [ceph_rgw]
-ihs-ceph-rgw-[01:02].ihs.org
+ihs-ceph-rgw-[01:02].monkeyboy107.com
 
 [ceph_mds]
-ihs-ceph-mds-[01:02].ihs.org
+ihs-ceph-mds-[01:02].monkeyboy107.com
 
 [ceph_iscsi]
-ihs-ceph-iscsi-[01:02].ihs.org
+ihs-ceph-iscsi-[01:02].monkeyboy107.com
 
 [ceph_servers:children]
 ceph_monitors

@@ -2,10 +2,10 @@
 ihs-ansible-01 
 
 [ceph_monitors]
-ihs-ceph-monitor-[01:05].ihs.org
+ihs-ceph-monitor-[01:05].monkeyboy107.com
 
 [ceph_osds]
-ihs-ceph-osd-[01:03].ihs.org
+ihs-ceph-osd-[01:03].monkeyboy107.com
 
 [ceph_admins:children]
 ceph_monitors

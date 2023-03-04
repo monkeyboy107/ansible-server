@@ -5,7 +5,7 @@ commands:
   - "{{ cephadm_path }} add-repo --release {{ ceph_release }}"
   - "{{ cephadm_path }} install"
   - "{{ cephadm_path }} bootstrap --mon-ip {{ ansible_default_ipv4.address }} --allow-fqdn-hostname>/tmp/password"
-  - "{{ cephadm_path }}" shell -- ceph mgr module enable balancer
-  - "{{ cephadm_path }}" shell -- ceph balancer on
-  - "{{ cephadm_path }}" shell -- ceph balancer mode upmap
-  - "{{ cephadm_path }}" shell -- ceph telemetry enable channel all
+  - "{{ cephadm_path }} shell -- ceph mgr module enable balancer"
+  - "{{ cephadm_path }}` shell -- ceph balancer on"
+  - "{{ cephadm_path }} shell -- ceph balancer mode upmap"
+  - "{{ cephadm_path }} shell -- ceph telemetry enable channel all"

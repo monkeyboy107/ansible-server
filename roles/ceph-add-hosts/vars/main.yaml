@@ -1,4 +1,6 @@
-roles_with_nodes_dict: {mon: "{{ groups.ceph_monitors }}", mgr: "{{ groups.ceph_mgrs }}", _admin: "{{ groups.ceph_admins }}", osd: "{{ groups.ceph_osds }}", nfs: "{{ groups.ceph_nfs }}", rgw: "{{ groups.ceph_rgw }}", mds: "{{ groups.ceph_mds }}", iscsi: "{{ groups.ceph_iscsi }}"}
+roles_with_nodes_dict: {mon: "{{ groups.ceph_monitors }}", mgr: "{{ groups.ceph_mgrs }}", _admin: "{{ groups.ceph_admins }}", osd: "{{ groups.ceph_osds }}"}
+roles_with_nodes_and_ids_dict: {mds: "[{{ groups.ceph_mds }}, 'mds']", rgw: "[{{ groups.ceph_rgw }}, 1]", nfs: "[{{ groups.ceph_nfs }}, 1]"}
+# roles_with_nodes_and_ids_dict: {mds: "[{{ groups.ceph_mds }}, 'mds']", rgw: "[{{ groups.ceph_rgw }}, 1]", nfs: "[{{ groups.ceph_nfs }}]", iscsi: "[{{ groups.ceph_iscsi }}]"}
 roles_with_nodes_list: []
 roles_with_nodes: []
 commands:

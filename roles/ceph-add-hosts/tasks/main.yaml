@@ -67,7 +67,10 @@
     mode: '+x'
 
 - name: Install cephadm
-  shell: "{{ cephadm_path }} install"
+  shell: "{{ item }}"
+  loop:
+    - "{{ cephadm_path }} add-repo --release {{ ceph_release }}"
+    - "{{ cephadm_path }} install"
 
 - name: Check on disks are registered
   include_tasks: "check-ceph-disks.yaml"

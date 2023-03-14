@@ -1,0 +1,5 @@
+pool_size: 10737418240 # 10 TiB
+pool_name: 'backups'
+pool_pg: 32
+pool_type: 'replicated'
+autoscale_pg_mode: 'on'

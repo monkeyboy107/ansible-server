@@ -10,4 +10,4 @@ ceph_rgw: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: []}
 ceph_mds: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: []}
 ceph_iscsi: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: []}
 ceph_specs: {ceph_monitors: "{{ ceph_monitors }}", ceph_osds: "{{ ceph_osds}}", ceph_admins: "{{ ceph_admins }}", ceph_mgrs: "{{ ceph_mgrs }}", ceph_nfs: "{{ ceph_nfs }}", ceph_rgw: "{{ ceph_rgw }}", ceph_mds: "{{ ceph_mds }}", ceph_iscsi: "{{ ceph_iscsi }}"}
-pools_path_list: ['vars/ceph_pools/backups.yaml', 'vars/ceph_pools/cephfs.yaml']
+pools_path_list: ['ceph_pools/backups.yaml', 'ceph_pools/cephfs.yaml']

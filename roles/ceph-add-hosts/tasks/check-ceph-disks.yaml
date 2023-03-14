@@ -10,7 +10,7 @@
   delegate_to: "{{ groups.ceph_admins[0] }}"
 
 - name: Check if disks are ready, if they are not then rerun
-  when: results | length < 0
+  when: results | length <= 2
 #   - "{{ results != '' }}"
 #   - "{{ results != None }}"
   include_tasks: "check-ceph-disks.yaml"

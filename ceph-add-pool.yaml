@@ -2,5 +2,7 @@
   hosts: ceph_mgrs
   become: yes
   gather_facts: yes
-  roles:
+  include_role:
     - ceph-add-pool
+  loop: "{{ pools_path_list }}"
+  include_vars: "{{ item }}"

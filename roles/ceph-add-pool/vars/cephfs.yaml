@@ -1,5 +1,5 @@
 pool_size: 10485760 # 10 GiB
-pool_name: 'backups'
+pool_name: 'cephfs'
 pool_pg: 32
 pool_type: 'replicated'
 autoscale_pg_mode: 'on'

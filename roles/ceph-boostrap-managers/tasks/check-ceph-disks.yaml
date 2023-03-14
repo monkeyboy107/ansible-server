@@ -4,11 +4,13 @@
     results: ''
 
 - name: Gather facts of disks ready state
-  shell: "ceph orch device ls"
+  shell: "cephadm shell -- ceph orch device ls"
   register: results
+  run_once: true
+  delegate_to: "{{ groups.ceph_admins[0] }}"
 
-- name: Check if disks are ready, if they are not the rerun
-  when:
-   - results is ''
-   - results is None
-  include_tasks: "chech-ceph-disks.yaml"
+- name: Check if disks are ready, if they are not then rerun
+  when: results | length < 0
+#   - "{{ results != '' }}"
+#   - "{{ results != None }}"
+  include_tasks: "check-ceph-disks.yaml"

@@ -57,4 +57,4 @@
 #  loop: "{{ roles_with_nodes_and_ids_dict.keys }}"
 
 - name: Check on disks are registered
-  include_tasks: "chech-ceph-disks.yaml"
+  include_tasks: "check-ceph-disks.yaml"

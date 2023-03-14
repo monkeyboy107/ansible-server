@@ -6,5 +6,5 @@
    - name: Setup and configure ceph pools
      import_role:
        name: ceph-add-pool
+       vars_from: "{{ item }}"
      loop: "{{ pools_path_list }}"
-     include_vars: "{{ item }}"

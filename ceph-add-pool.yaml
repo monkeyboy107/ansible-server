@@ -3,4 +3,4 @@
   become: yes
   gather_facts: yes
   roles:
-    - ceph-add-pools
+    - ceph-add-pool

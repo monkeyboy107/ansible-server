@@ -1,6 +1,3 @@
-ceph_container: 
-  - {name: quay.io/ceph/ceph, tag: v17}
-  - {name: quay.io/prometheus/alertmanager, tag: v0.23.0}
 commands:
   - "{{ cephadm_path }} add-repo --release {{ ceph_release }}"
   - "{{ cephadm_path }} install"

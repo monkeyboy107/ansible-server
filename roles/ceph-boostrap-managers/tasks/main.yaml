@@ -10,12 +10,6 @@
     url: "{{ cephadm_url }}"
     dest: '{{ cephadm_path }}'
 
-- name: Pull images
-  podman_image:
-    name: "{{ item.name }}"
-    tag: "{{ item.tag }}"
-  loop: "{{ ceph_container }}"
-
 - name: Make cephadm executable
   file:
     path: "{{ cephadm_path }}"

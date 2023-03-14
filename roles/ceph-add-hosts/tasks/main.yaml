@@ -56,21 +56,10 @@
 #  shell: "cephadm shell -- ceph orch apply {{ item.0 }} label:{{ item.0 }}"
 #  loop: "{{ roles_with_nodes_and_ids_dict.keys }}"
 
-- name: Download cephadm
-  get_url:
-    url: "{{ cephadm_url }}"
-    dest: '{{ cephadm_path }}'
-
-- name: Make cephadm executable
-  file:
-    path: "{{ cephadm_path }}"
-    mode: '+x'
-
-- name: Install cephadm
-  shell: "{{ item }}"
-  loop:
-    - "{{ cephadm_path }} add-repo --release {{ ceph_release }}"
-    - "{{ cephadm_path }} install"
-
 - name: Check on disks are registered
   include_tasks: "check-ceph-disks.yaml"
+
+- name: Add OSDs
+  run_once: true
+  delegate_to: "{{ groups.ceph_admins[0] }}"
+  shell: "ceph orch apply osd --all-available-devices"

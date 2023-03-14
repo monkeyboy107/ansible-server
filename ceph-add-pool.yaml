@@ -4,7 +4,7 @@
   gather_facts: yes
   tasks:
    - name: Setup and configure ceph pools
-     import_role:
+     include_role:
        name: ceph-add-pool
        vars_from: "{{ item }}"
      loop: "{{ pools_path_list }}"

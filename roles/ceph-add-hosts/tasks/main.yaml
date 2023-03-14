@@ -56,5 +56,18 @@
 #  shell: "cephadm shell -- ceph orch apply {{ item.0 }} label:{{ item.0 }}"
 #  loop: "{{ roles_with_nodes_and_ids_dict.keys }}"
 
+- name: Download cephadm
+  get_url:
+    url: "{{ cephadm_url }}"
+    dest: '{{ cephadm_path }}'
+
+- name: Make cephadm executable
+  file:
+    path: "{{ cephadm_path }}"
+    mode: '+x'
+
+- name: Install cephadm
+  shell: "{{ cephadm_path }} install"
+
 - name: Check on disks are registered
   include_tasks: "check-ceph-disks.yaml"

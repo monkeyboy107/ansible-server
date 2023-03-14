@@ -1,0 +1,6 @@
+- name: Setup ceph pools
+  hosts: ceph_mgrs
+  become: yes
+  gather_facts: yes
+  roles:
+    - ceph-add-pools

@@ -1,0 +1,10 @@
+---
+- name: Add the ceph pool(s)
+  run_once: true
+  delegate_to: "{{ groups.ceph_admins[0] }}"
+  shell: "cephadm shell -- ceph osd pool create {{ pool_name )) {{ pool_pg }} --autoscale-mode={{ autoscale_pg_mode }} {{ pool_type }}"
+
+- name: Define how large the pool is 
+  run_once: true
+  delegate_to: "{{ groups.ceph_admins[0] }}"
+  shell: "cephadm shell -- ceph osd pool set-quota {{ pool_name )) max_bytes {{ pool_size }}}"

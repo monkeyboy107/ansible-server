@@ -3,8 +3,8 @@
   become: yes
   gather_facts: yes
   tasks:
-    - name: Setup and configure ceph pools
-      include_role:
-        - ceph-add-pool
-      loop: "{{ pools_path_list }}"
-      include_vars: "{{ item }}"
+   - name: Setup and configure ceph pools
+     include_role:
+       - ceph-add-pool
+     loop: "{{ pools_path_list }}"
+     include_vars: "{{ item }}"

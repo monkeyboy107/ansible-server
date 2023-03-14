@@ -1,8 +1,10 @@
-- name: Setup ceph pools
+- name: Setup and configure ceph pools
   hosts: ceph_mgrs
   become: yes
   gather_facts: yes
-  include_role:
-    - ceph-add-pool
-  loop: "{{ pools_path_list }}"
-  include_vars: "{{ item }}"
+  tasks:
+    - name: Setup and configure ceph pools
+      include_role:
+        - ceph-add-pool
+      loop: "{{ pools_path_list }}"
+      include_vars: "{{ item }}"

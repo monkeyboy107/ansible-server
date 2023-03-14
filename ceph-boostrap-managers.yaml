@@ -8,7 +8,7 @@
         name: "python3"
         state: "present"
 
-- name: Setup adnin boostrap
+- name: Setup admin boostrap
   hosts: ceph_admins[0]
   become: yes
   gather_facts: yes

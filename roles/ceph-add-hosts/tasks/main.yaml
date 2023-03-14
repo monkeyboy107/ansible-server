@@ -62,4 +62,4 @@
 - name: Add OSDs
   run_once: true
   delegate_to: "{{ groups.ceph_admins[0] }}"
-  shell: "ceph orch apply osd --all-available-devices"
+  shell: "cephadm shell -- ceph orch apply osd --all-available-devices"

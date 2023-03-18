@@ -2,4 +2,5 @@ disks_count: "1"
 disks_with_int: []
 vm_name: {}
 start_on_boot: false
+bridge: vmbr0
 

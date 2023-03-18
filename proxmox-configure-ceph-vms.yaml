@@ -4,7 +4,6 @@
   gather_facts: no
   vars:
     - guest_hosts: []
-    - start_on_boot: true
   tasks:
    - name: Assigning guest_hosts
      loop: "{{ ceph_specs.keys() | list }}"
@@ -15,3 +14,6 @@
    - name: Configure VMs intially from baseline defaults
      import_role:
        name: proxmox-reconfigure-vm
+     vars:
+       - start_on_boot: true
+

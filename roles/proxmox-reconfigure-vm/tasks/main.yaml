@@ -31,7 +31,7 @@
 # Sets to boot with the hypervisor
 - name: Boot VM with host
   run_once: true
-  shell: "qm set {{ item }} --onboot 1"
-  loop: "{{ guest_hosts | list() }}"
+  shell: "qm set {{ vm_name[ item.name ] }} --onboot 1"
+  loop: "{{ guest_hosts | list }}"
   when: start_on_boot
 

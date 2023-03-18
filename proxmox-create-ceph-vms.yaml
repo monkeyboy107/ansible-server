@@ -1,3 +1,6 @@
+- name: Setting the VMs to start on boot
+  set_fact: 
+    start_on_boot: true
 - name: Clone the ceph vm
   import_playbook: proxmox-clone-ceph-vms.yaml
 - name: Configure the ceph vms

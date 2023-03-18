@@ -1,13 +1,13 @@
 ceph_release: 'quincy'
 cephadm_url: 'https://github.com/ceph/ceph/raw/quincy-release/src/cephadm/cephadm'
 cephadm_path: '/tmp/cephadm'
-ceph_monitors: {name: "", 'cores': 2, "sockets": 2, 'memory': 8192, hdd: []}
-ceph_osds:  {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: ['20G']}
-ceph_admins: {name: "", 'cores': 2, "sockets": 2, 'memory': 8192, hdd: []} 
-ceph_mgrs: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: []}
-ceph_nfs: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: []}
-ceph_rgw: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: []}
-ceph_mds: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: []}
-ceph_iscsi: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, hdd: []}
+ceph_monitors: {name: "", 'cores': 2, "sockets": 2, 'memory': 8192, vlan_id: 20, hdd: []}
+ceph_osds:  {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, vlan_id: 20, hdd: ['20G']}
+ceph_admins: {name: "", 'cores': 2, "sockets": 2, 'memory': 8192, vlan_id: 20, hdd: []} 
+ceph_mgrs: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, vlan_id: 20, hdd: []}
+ceph_nfs: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, vlan_id: 20, hdd: []}
+ceph_rgw: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, vlan_id: 20, hdd: []}
+ceph_mds: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, vlan_id: 20, hdd: []}
+ceph_iscsi: {name: "", 'cores': 1, "sockets": 1, 'memory': 8192, vlan_id: 20, hdd: []}
 ceph_specs: {ceph_monitors: "{{ ceph_monitors }}", ceph_osds: "{{ ceph_osds}}", ceph_admins: "{{ ceph_admins }}", ceph_mgrs: "{{ ceph_mgrs }}", ceph_nfs: "{{ ceph_nfs }}", ceph_rgw: "{{ ceph_rgw }}", ceph_mds: "{{ ceph_mds }}", ceph_iscsi: "{{ ceph_iscsi }}"}
 pools_path_list: ['backups.yaml', 'cephfs.yaml']

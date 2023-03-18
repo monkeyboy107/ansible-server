@@ -14,6 +14,6 @@
    - name: Configure VMs intially from baseline defaults
      import_role:
        name: proxmox-reconfigure-vm
-     vars:
-       - start_on_boot: true
+       vars:
+         - start_on_boot: true
 

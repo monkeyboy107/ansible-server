@@ -4,6 +4,5 @@
   gather_facts: no
   vars:
     - guest_hosts: [{name: "ihs-test-host-01.ihs.org", 'cores': 4, 'memory': 10240, 'sockets': 4, hdd: ['1G']}]
-    - start_on_boot: true
   roles:
     - proxmox-reconfigure-vm

@@ -4,6 +4,7 @@
   gather_facts: no
   vars:
     - guest_hosts: []
+    - start_on_boot: true
   tasks:
    - name: Assigning guest_hosts
      loop: "{{ ceph_specs.keys() | list }}"

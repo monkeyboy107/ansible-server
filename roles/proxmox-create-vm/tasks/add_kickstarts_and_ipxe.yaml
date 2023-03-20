@@ -19,11 +19,13 @@
 
 - name: Filter for the mac address
   set_fact:
-    mac_address: "{{ mac_adress.stdout }}"
-    mac_address: "{{ mac_address }} | split(',')"
-    mac_address: "{{ mac_address[0] }}"
-    mac_address: "{{ mac_address | split('=')}}"
-    mac_address: "{{ mac_address[0] }}"
+    mac_address: {{ item }}
+  loop:
+    - "{{ mac_adress.stdout }}"
+    - "{{ mac_address }} | split(',')"
+    - "{{ mac_address[0] }}"
+    - "{{ mac_address | split('=')}}"
+    - "{{ mac_address[0] }}"
 
 
 - name: Add kickstarts

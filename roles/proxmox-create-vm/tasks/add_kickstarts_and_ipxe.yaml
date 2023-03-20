@@ -12,23 +12,25 @@
 
 - name: Retrieve mac address
   delegate_to: "{{ groups.proxmox_servers[0] }}"
-  shell: "qm config {{ all_VMIDs_dict[item] }} | grep net0 | tail -1 | awk {'print $2'}"
-  register: mac_address
+  shell: "qm config {{ item }} | grep net0 | tail -1 | awk {'print $2'}"
+  register: raw_mac_address
   loop: "{{ all_VMIDs_dict.keys() }}"
   when: all_VMIDs_dict[item] == guest_host
 
 - name: Filter for the mac address
   set_fact:
-    mac_address: "{{ mac_address.results.stdout_lines|
+    mac_addresses: "({{ item.stdout_lines|
              flatten|
               map('regex_replace', _regex, _replace)|
               map('trim')|
               map('split')|
               map('join', ':')|
-              list }}"
+              list + mac_addresses}})"
     vars:
       _regex: '.*"(.*)"'
       _replace: '\1'
+    when: item.skipped is not true
+    loop: raw_mac_address.results
 
 
 - name: Add kickstarts

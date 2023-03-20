@@ -1,0 +1,38 @@
+---
+- name: Retrieve every VMID
+  shell: "qm list | awk {'print $1, $2'}"
+  register: all_VMIDs
+  delegate_to: "{{ groups.proxmox_servers[0] }}"
+
+# I wanted a dict so I can make for damn sure that the vmids aren't overlapping.
+# I prefer a single VM to be able to deploy than no VM deploy 
+- name: Make dict of VMIDs with hostnames
+  set_fact:
+    all_VMIDs_dict: "{{ all_VMIDs_dict | combine({item.split(' ')[0]: item.split(' ')[1]} ) }}"
+  loop: "{{ all_VMIDs.stdout_lines }}"
+
+- name: Generate VMIDs and append a list
+  run_once: true
+  include_tasks: increment_vmid_counter.yaml
+  loop: "{{ ansible_play_hosts }}"
+  loop_control:
+    loop_var: guest_host
+
+# Zips the VMIDs with the hosts
+- name: Assign unique ID for each VM
+  set_fact:
+    all_VMIDs_dict: "{{ all_VMIDs_dict | combine( {item.0: item.1} ) }}"
+  loop: "{{ ID_list | zip(ansible_play_hosts) }}"
+
+- name: Clone the VMs
+  loop: "{{ ansible_play_hosts }}"
+  loop_control:
+    loop_var: "guest_host"
+  include_tasks: "create_vm.yaml"
+
+- name: Add kickstarts and ipxe scripts
+  loop: "{{ ansible_play_hosts }}"
+  loop_control:
+    loop_var: "guest_host"
+  include_tasks: "add_kickstarts_and_ipxe.yaml"
+  

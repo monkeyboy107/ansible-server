@@ -1,0 +1,68 @@
+#version=RHEL8
+# Use graphical install
+graphical
+
+# repo --name="AppStream" --baseurl=https://rocky-linux-northamerica-northeast1.production.gcp.mirrors.ctrliq.cloud/pub/rocky/8.7/AppStream/
+# repo --name="BaseOS" --baseurl=https://rocky-linux-northamerica-northeast1.production.gcp.mirrors.ctrliq.cloud/pub/rocky/8.7/BaseOS/
+
+%packages
+@^server-product-environment
+@guest-agents
+@remote-system-management
+kexec-tools
+
+%end
+
+# Keyboard layouts
+keyboard --xlayouts='us'
+# System language
+lang en_US.UTF-8
+
+# Network information
+network  --hostname=localhost.localdomain
+
+# Use network installation
+url --url="https://download.rockylinux.org/pub/rocky/8.7/BaseOS/x86_64/os/"
+
+# Run the Setup Agent on first boot
+firstboot --enable
+
+ignoredisk --only-use=sda
+autopart
+# Partition clearing information
+clearpart --none --initlabel
+
+# System timezone
+timezone America/Denver --isUtc
+
+#Root password
+rootpw --lock
+user --groups=wheel --name={{ ansible_user }} --gecos="{{ ansible_user }}"
+
+%addon com_redhat_kdump --enable --reserve-mb='auto'
+
+%end
+
+%anaconda
+pwpolicy root --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+pwpolicy user --minlen=6 --minquality=1 --notstrict --nochanges --emptyok
+pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+%end
+
+%post --log=/root/post-install.log
+mkdir -m0700 /home/{{ ansible_user }}/.ssh
+
+cat <<EOF >/home/{{ ansible_user }}/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCva6NLDgsRFyOANsq72hOVWs8izAZJyHn2JjnZSVNfGf8cM6gs+/eS8My1MKP4yU3NTGzAGHnG8aNEyl1YZOojeyt9ulQaSjBnaBSgGau6WKkkGWH5UPnlB39qM4v74JAZr/VkSljbPyl+6R+LGpE97D6ILYMiwQYVEaXol//lW89jLyQHF42WN/S5RHjzwA319yp0zCBdMN8cbdfvu6Cdto0B3ul1fBb+KZrEMapB8e3rJpiRsLFXVtntyAzBGCyUNoviOdUUg1Ymnjn44E5sioxD5e1MiPG3VrZVd0LB1/Bwmxn8GfMheAonPk7EIwysEC4aL4ypKMOBngmf7F8xKlj5qeyJfZfy3PU+F0JdYeOwCkTuJONOCmPUCjmLHIqdERUSXBlPgMiKTHBKMKz/ActD3vouMeSjVap4VnwA72NM2V1XRzZ5C3OPF88S++mIB9M1PPGCtz1V6Dy5yNtaRz5caXq5eiHlURqtPJUqEBBo+ap6PhG/7JkKiLimrcU= ansible@ihs-ansible-01.monkeyboy107.com
+EOF
+
+### set permissions
+chmod 0600 /home/ansible/.ssh/authorized_keys
+chown 1000:1000 -R home/{{ ansible_user }}/.ssh
+
+### Fix up SElinux context
+restorecon -R /home/{{ ansible_user }}/.ssh
+
+%end
+reboot
+

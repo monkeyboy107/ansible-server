@@ -1,0 +1,25 @@
+---
+- name: Retrieve mac address
+  delegate_to: {{ groups.proxmox_servers[0] }}"
+  shell: "qm config all_VMIDs_dict[item] | grep net0 | tail -1 | awk {'print $2'}"
+  register: mac_address
+
+- name: Filter for the mac address
+  set_fact:
+    mac_address: "{{ mac_address }} | split(',')"
+    mac_address: "{{ mac_address[0] }}"
+    mac_address: "{{ mac_address | split('=')}}
+    mac_address: "{{ mac_address[0] }}"
+
+
+- name: Add kickstarts
+  delegate_to: {{ groups.ipxe_servers[0] }}"
+  templates: 
+    src: ../templates/kickstart.ks.j2
+    dest: /var/www/html/rocky/8/ks/{{ mac_address }}.ks
+    
+- name: Add ipxe
+  delegate_to: {{ groups.ipxe_servers[0] }}"
+  templates:
+    src: ../templates/mac-address-template.ipxe.j2
+    dest: /var/www/html/labnet/{{ mac_address }}.ipxe

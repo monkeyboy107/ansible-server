@@ -5,6 +5,11 @@
   register: all_VMIDs
   delegate_to: "{{ groups.proxmox_servers[0] }}"
 
+- name: Make dict of VMIDs with hostnames
+  set_fact:
+    all_VMIDs_dict: "{{ all_VMIDs_dict | combine({item.split(' ')[0]: item.split(' ')[1]} ) }}"
+  loop: "{{ all_VMIDs.stdout_lines }}"
+
 - name: Retrieve mac address
   delegate_to: "{{ groups.proxmox_servers[0] }}"
   shell: "qm config {{ all_VMIDs_dict[item] }} | grep net0 | tail -1 | awk {'print $2'}"
@@ -12,14 +17,9 @@
   loop: "{{ all_VMIDs_dict.keys() }}"
   when: all_VMIDs_dict[item] == guest_host
 
-- name: Make dict of VMIDs with hostnames
-  set_fact:
-    all_VMIDs_dict: "{{ all_VMIDs_dict | combine({item.split(' ')[0]: item.split(' ')[1]} ) }}"
-  loop: "{{ all_VMIDs.stdout_lines }}"
-
 - name: Filter for the mac address
   set_fact:
-    mac_address: "{{ mac_address.stdout|
+    mac_address: "{{ mac_address.results.stdout_lines|
              flatten|
               map('regex_replace', _regex, _replace)|
               map('trim')|

@@ -8,7 +8,7 @@
   set_fact:
     mac_address: "{{ mac_address }} | split(',')"
     mac_address: "{{ mac_address[0] }}"
-    mac_address: "{{ mac_address | split('=')}}
+    mac_address: "{{ mac_address | split('=')}}"
     mac_address: "{{ mac_address[0] }}"
 
 

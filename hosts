@@ -40,3 +40,9 @@ proxmox_servers
 
 [proxmox_servers]
 ihs-hypervisor-01 ansible_remote_tmp=/tmp/.ansible/tmp
+
+[ipxe_servers]
+ihs-ipxe-01.monkeyboy107.com
+
+[ipxe_web_servers:children]
+ipxe_servers

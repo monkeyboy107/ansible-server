@@ -19,7 +19,7 @@
 
 - name: Filter for the mac address
   set_fact:
-    mac_address: "{{ mac_address.stdout_lines|
+    mac_address: "{{ mac_address.stdout|
              flatten|
               map('regex_replace', _regex, _replace)|
               map('trim')|

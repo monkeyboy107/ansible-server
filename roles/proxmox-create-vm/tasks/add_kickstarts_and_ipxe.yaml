@@ -3,7 +3,7 @@
   delegate_to: "{{ groups.proxmox_servers[0] }}"
   shell: "qm config {{ all_VMIDs_dict[item] }} | grep net0 | tail -1 | awk {'print $2'}"
   register: mac_address
-    loop: "{{ all_VMIDs_dict.keys() }}"
+  loop: "{{ all_VMIDs_dict.keys() }}"
   when: all_VMIDs_dict[item] == guest_host
 
 - name: Filter for the mac address

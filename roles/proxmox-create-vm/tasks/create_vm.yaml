@@ -1,6 +1,6 @@
 ---
 - name: Create disks
-  shell: "pvesm alloc local-lvm {{ item }} '' 0"
+  shell: "pvesm alloc local-lvm {{ item }} '' 32"
   loop: "{{ ID_list }}"
   delegate_to: "{{ groups.proxmox_servers[0] }}"
   when: all_VMIDs_dict[item] == guest_host

@@ -30,10 +30,6 @@
     loop_var: "guest_host"
   include_tasks: "create_vm.yaml"
 
-- name: Create disks
-  shell: "pvesm alloc local-lvm {{ item }} '' 0"
-  loop: "{{ ID_list }}"
-
 
 - name: Add kickstarts and ipxe scripts
   loop: "{{ ansible_play_hosts }}"

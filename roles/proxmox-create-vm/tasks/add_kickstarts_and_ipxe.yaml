@@ -19,16 +19,13 @@
 
 - name: Filter for the mac address	
   set_fact:
-    mac_addresses: "({{ item.stdout_lines|
-             flatten|
-              map('regex_replace', '.*"(.*)"', '\1')|
-              map('trim')|
-              map('split')|
-              map('join', ':')|
-              list + mac_addresses}})"
+    mac_addresses: "({{ item.stdout_lines }})"
   when: item.skipped is not true
   loop: "{{ raw_mac_address.results }}"
 
+- name: Display mac_addresses
+  debug:
+    msg: "{{ mac_addresses }}"
 
 - name: Add kickstarts
   delegate_to: "{{ groups.ipxe_servers[0] }}"

@@ -10,5 +10,5 @@
   run_once: true
   shell: "qm create {{ item }} --name {{ all_VMIDs_dict[item] }} --acpi 1 --agent 1 --sockets 1 --cores 1 --memory 1024 --net0 virtio,bridge=vmbr0 --scsi0 local-lvm:vm-{{ item }}-disk-0,size=32 --ostype l26 --boot 'order=scsi0;net0'"
   delegate_to: "{{ groups.proxmox_servers[0] }}"
-  loop: "{{ all_VMIDs_dict.keys() }}"
+  loop: "{{ ID_list }}"
   when: all_VMIDs_dict[item] == guest_host

@@ -18,7 +18,7 @@
 
 - name: Make dict of hostnames with VMIDs 
   set_fact:
-    all_hostnames_dict: "{{ all_hostnames_dict | combine({item.split(' ')[0]: item.split(' ')[1]} ) }}"
+    all_hostnames_dict: "{{ all_hostnames_dict | combine({item.split(' ')[1]: item.split(' ')[0]} ) }}"
   loop: "{{ all_VMIDs.stdout_lines }}"
 
 - name: Generate VMIDs and append a list

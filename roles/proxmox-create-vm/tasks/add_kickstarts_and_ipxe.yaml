@@ -22,15 +22,18 @@
     mac_addresses: "{{ item.stdout_lines | regex_findall('^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$') }}"
   when: item.skipped is not true
   loop: "{{ raw_mac_address.results }}"
+  when: all_VMIDs_dict[item] == guest_host
 
 - name: Add kickstarts
   delegate_to: "{{ groups.ipxe_servers[0] }}"
   template: 
     src: ../templates/kickstart.ks.j2
-    dest: /var/www/html/rocky/8/ks/{{ mac_address }}.ks
+    dest: /var/www/html/rocky/8/ks/{{ item }}.ks
+  loop: "{{ mac_addresses }}"
     
 - name: Add ipxe
   delegate_to: "{{ groups.ipxe_servers[0] }}"
   template:
     src: ../templates/mac-address-template.ipxe.j2
-    dest: /var/www/html/labnet/{{ mac_address }}.ipxe
+    dest: /var/www/html/labnet/{{ item }}.ipxe
+  loop: "{{ mac_addresses }}"

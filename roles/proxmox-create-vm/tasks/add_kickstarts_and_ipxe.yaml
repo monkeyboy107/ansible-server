@@ -1,7 +1,7 @@
 ---
 - name: Retrieve mac address
   delegate_to: "{{ groups.proxmox_servers[0] }}"
-  shell: "qm config {{ all_VMIDs_dict[guest_host] }} | grep net0 | tail -1 | awk {'print $2'} | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'"
+  shell: "qm config {{ all_hostnames_dict[guest_host] }} | grep net0 | tail -1 | awk {'print $2'} | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'"
   register: raw_mac_address
 
 - name: Filter for the mac address	

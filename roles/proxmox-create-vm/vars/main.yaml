@@ -1,5 +1,6 @@
 bridge: vmbr0
 all_VMIDs_dict: []
+all_hostnames_dict: []
 vmid_start: 4000
 ID_list: []
 mac_addresses: []

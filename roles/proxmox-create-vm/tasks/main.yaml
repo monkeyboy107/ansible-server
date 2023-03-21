@@ -24,11 +24,16 @@
     all_VMIDs_dict: "{{ all_VMIDs_dict | combine( {item.0: item.1} ) }}"
   loop: "{{ ID_list | zip(ansible_play_hosts) }}"
 
-- name: Clone the VMs
+- name: Create the VMs
   loop: "{{ ansible_play_hosts }}"
   loop_control:
     loop_var: "guest_host"
   include_tasks: "create_vm.yaml"
+
+- name: Create disks
+  shell: "pvesm alloc local-lvm {{ item }} '' 0"
+  loop: "{{ ID_list }}"
+
 
 - name: Add kickstarts and ipxe scripts
   loop: "{{ ansible_play_hosts }}"

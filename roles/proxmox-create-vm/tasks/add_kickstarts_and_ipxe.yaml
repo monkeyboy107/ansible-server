@@ -29,7 +29,6 @@
     src: kickstart.ks.j2
     dest: /var/www/html/rocky/8/ks/{{ item }}.ks
   loop: "{{ mac_addresses }}"
-  when: all_VMIDs_dict[item] == guest_host
     
 - name: Add ipxe
   delegate_to: "{{ groups.ipxe_servers[0] }}"
@@ -37,4 +36,3 @@
     src: mac-address-template.ipxe.j2
     dest: /var/www/html/labnet/{{ item }}.ipxe
   loop: "{{ mac_addresses }}"
-  when: all_VMIDs_dict[item] == guest_host

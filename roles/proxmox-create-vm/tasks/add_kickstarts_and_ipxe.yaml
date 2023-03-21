@@ -17,7 +17,7 @@
   loop: "{{ all_VMIDs_dict.keys() }}"
   when: all_VMIDs_dict[item] == guest_host
 
-- name: Filter for the mac address
+- name: Filter for the mac address	
   set_fact:
     mac_addresses: "({{ item.stdout_lines|
              flatten|
@@ -30,7 +30,7 @@
       _regex: '.*"(.*)"'
       _replace: '\1'
   when: item.skipped is not true
-  loop: raw_mac_address.results
+  loop: "{{ raw_mac_address.results }}"
 
 
 - name: Add kickstarts

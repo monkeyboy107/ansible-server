@@ -27,8 +27,10 @@
   delegate_to: "{{ groups.ipxe_servers[0] }}"
   template: 
     src: kickstart.ks.j2
-    dest: /var/www/html/rocky/8/ks/{{ item }}.ks
+    dest: /var/www/html/rocky/8/ks/{{ mac }}.ks
   loop: "{{ mac_addresses }}"
+  loop_control:
+    loop_var: mac
     
 - name: Add ipxe
   delegate_to: "{{ groups.ipxe_servers[0] }}"

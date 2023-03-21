@@ -29,8 +29,8 @@
     vars:
       _regex: '.*"(.*)"'
       _replace: '\1'
-    when: item.skipped is not true
-    loop: raw_mac_address.results
+  when: item.skipped is not true
+  loop: raw_mac_address.results
 
 
 - name: Add kickstarts

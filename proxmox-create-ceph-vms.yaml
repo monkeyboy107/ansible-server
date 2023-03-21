@@ -1,6 +1,8 @@
-- name: Clone the ceph vm
-  import_playbook: proxmox-clone-ceph-vms.yaml
-- name: Configure the ceph vms
-  import_playbook: proxmox-configure-ceph-vms.yaml
-- name: Start ceph vms
-  import_playbook: proxmox-start-ceph-vms.yaml
+- name: Create the ceph_vm
+  hosts: ceph_servers
+  become: yes
+  gather_facts: no
+  tasks:
+   - name: Create the VMs
+     import_role:
+       name: proxmox-create-vm

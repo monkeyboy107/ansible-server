@@ -21,14 +21,11 @@
   set_fact:
     mac_addresses: "({{ item.stdout_lines|
              flatten|
-              map('regex_replace', _regex, _replace)|
+              map('regex_replace', '.*"(.*)"', '\1')|
               map('trim')|
               map('split')|
               map('join', ':')|
               list + mac_addresses}})"
-    vars:
-      _regex: '.*"(.*)"'
-      _replace: '\1'
   when: item.skipped is not true
   loop: "{{ raw_mac_address.results }}"
 

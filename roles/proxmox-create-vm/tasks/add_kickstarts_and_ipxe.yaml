@@ -26,13 +26,13 @@
 - name: Add kickstarts
   delegate_to: "{{ groups.ipxe_servers[0] }}"
   template: 
-    src: ../templates/kickstart.ks.j2
+    src: kickstart.ks.j2
     dest: /var/www/html/rocky/8/ks/{{ item }}.ks
   loop: "{{ mac_addresses }}"
     
 - name: Add ipxe
   delegate_to: "{{ groups.ipxe_servers[0] }}"
   template:
-    src: ../templates/mac-address-template.ipxe.j2
+    src: mac-address-template.ipxe.j2
     dest: /var/www/html/labnet/{{ item }}.ipxe
   loop: "{{ mac_addresses }}"

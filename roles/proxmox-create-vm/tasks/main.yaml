@@ -30,7 +30,6 @@
     loop_var: "guest_host"
   include_tasks: "create_vm.yaml"
 
-
 - name: Add kickstarts and ipxe scripts
   loop: "{{ ansible_play_hosts }}"
   loop_control:

@@ -1,21 +1,8 @@
 ---
-# Gets the VMIDs from proxmox
-- name: Retrieve every VMID
-  shell: "qm list | awk {'print $1, $2'}"
-  register: all_VMIDs
-  delegate_to: "{{ groups.proxmox_servers[0] }}"
-
-- name: Make dict of VMIDs with hostnames
-  set_fact:
-    all_VMIDs_dict: "{{ all_VMIDs_dict | combine({item.split(' ')[0]: item.split(' ')[1]} ) }}"
-  loop: "{{ all_VMIDs.stdout_lines }}"
-
 - name: Retrieve mac address
   delegate_to: "{{ groups.proxmox_servers[0] }}"
-  shell: "qm config {{ item }} | grep net0 | tail -1 | awk {'print $2'} | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'"
+  shell: "qm config all_VMIDs_dict[guest_host] | grep net0 | tail -1 | awk {'print $2'} | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'"
   register: raw_mac_address
-  loop: "{{ all_VMIDs_dict.keys() }}"
-  when: all_VMIDs_dict[item] == guest_host
 
 - name: Filter for the mac address	
   set_fact:
@@ -29,12 +16,9 @@
     src: kickstart.ks.j2
     dest: /var/www/html/rocky/8/ks/{{ mac }}.ks
   loop: "{{ mac_addresses }}"
-  loop_control:
-    loop_var: mac
     
 - name: Add ipxe
   delegate_to: "{{ groups.ipxe_servers[0] }}"
   template:
     src: mac-address-template.ipxe.j2
     dest: /var/www/html/labnet/{{ ansible_host }}.ipxe
-#  loop: "{{ mac_addresses }}"

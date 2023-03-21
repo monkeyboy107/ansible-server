@@ -19,7 +19,7 @@
 
 - name: Filter for the mac address	
   set_fact:
-    mac_addresses: "{{ item.stdout_lines | regex_findall('^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$') }} + mac_addresses"
+    mac_addresses: "{{ item.stdout_lines | regex_findall('^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$') + mac_addresses }}"
   when: item.changed
   loop: "{{ raw_mac_address.results }}"
   

@@ -1,6 +1,6 @@
 ---
 - name: Retrieve VMIDs
-  include_tasks: "retriev_VMIDs.yaml"
+  include_tasks: "retrieve_VMIDs.yaml"
 
 # Zips the VMIDs with the hosts
 - name: Assign unique ID for each VM
@@ -15,7 +15,7 @@
   include_tasks: "create_vm.yaml"
 
 - name: Retrieve VMIDs
-  include_tasks: "retriev_VMIDs.yaml"
+  include_tasks: "retrieve_VMIDs.yaml"
 
 - name: Add kickstarts and ipxe scripts
   loop: "{{ ansible_play_hosts }}"

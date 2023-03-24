@@ -26,3 +26,4 @@
 - name: Add kickstarts and ipxe scripts
   loop: "{{ ID_list }}"
   shell: "qm start {{ item }}"
+  delegate_to: "{{ groups.ipxe_servers[0] }}"

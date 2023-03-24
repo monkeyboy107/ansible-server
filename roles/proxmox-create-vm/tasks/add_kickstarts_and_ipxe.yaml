@@ -22,5 +22,5 @@
   delegate_to: "{{ groups.ipxe_servers[0] }}"
   template:
     src: mac-address-template.ipxe.j2
-    dest: /var/www/html/labnet/{{ ansible_host }}.ipxe
+    dest: /var/www/html/labnet/{{ all_VMIDs_dict[guest_vmid] }}.ipxe
   when: raw_mac_address.changed

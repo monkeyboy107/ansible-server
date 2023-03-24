@@ -55,6 +55,7 @@ mkdir -m0700 /home/{{ ansible_user }}/.ssh
 cat <<EOF >/home/{{ ansible_user }}/.ssh/authorized_keys
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCva6NLDgsRFyOANsq72hOVWs8izAZJyHn2JjnZSVNfGf8cM6gs+/eS8My1MKP4yU3NTGzAGHnG8aNEyl1YZOojeyt9ulQaSjBnaBSgGau6WKkkGWH5UPnlB39qM4v74JAZr/VkSljbPyl+6R+LGpE97D6ILYMiwQYVEaXol//lW89jLyQHF42WN/S5RHjzwA319yp0zCBdMN8cbdfvu6Cdto0B3ul1fBb+KZrEMapB8e3rJpiRsLFXVtntyAzBGCyUNoviOdUUg1Ymnjn44E5sioxD5e1MiPG3VrZVd0LB1/Bwmxn8GfMheAonPk7EIwysEC4aL4ypKMOBngmf7F8xKlj5qeyJfZfy3PU+F0JdYeOwCkTuJONOCmPUCjmLHIqdERUSXBlPgMiKTHBKMKz/ActD3vouMeSjVap4VnwA72NM2V1XRzZ5C3OPF88S++mIB9M1PPGCtz1V6Dy5yNtaRz5caXq5eiHlURqtPJUqEBBo+ap6PhG/7JkKiLimrcU= ansible@ihs-ansible-01.monkeyboy107.com
 EOF
+echo "{{ ansible_user }} ALL=(ALL)    ALL" >> /etc/sudoers
 
 ### set permissions
 chmod 0600 /home/ansible/.ssh/authorized_keys
@@ -62,6 +63,7 @@ chown 1000:1000 -R home/{{ ansible_user }}/.ssh
 
 ### Fix up SElinux context
 restorecon -R /home/{{ ansible_user }}/.ssh
+restorecon /etc/sudoers
 
 %end
 shutdown

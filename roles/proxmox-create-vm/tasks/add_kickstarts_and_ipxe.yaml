@@ -1,15 +1,15 @@
 ---
 - name: Retrieve mac address
   delegate_to: "{{ groups.proxmox_servers[0] }}"
-  shell: "qm config {{ all_VMIDs_dict[guest_vmid] }} | grep net0 | tail -1 | awk {'print $2'} | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'"
+  shell: "qm config {{ guest_vmid }} | grep net0 | tail -1 | awk {'print $2'} | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'"
   register: raw_mac_address
-  when: all_VMIDs_dict[guest_vmid] == guest_vmid
+#  when: all_VMIDs_dict[guest_vmid] == guest_vmid
 
-- name: Filter for the mac address	
+- name: Filter for the mac address
   set_fact:
-    mac_address: "{{ item.stdout | lower }}"
+    mac_address: "{{ raw_mac_address.stdout | lower }}"
   when: raw_mac_address.changed
-  loop: "{{ raw_mac_address.results }}"
+#  loop: "{{ raw_mac_address.changed }}"
   
 - name: Add kickstarts
   delegate_to: "{{ groups.ipxe_servers[0] }}"
@@ -22,5 +22,5 @@
   delegate_to: "{{ groups.ipxe_servers[0] }}"
   template:
     src: mac-address-template.ipxe.j2
-    dest: /var/www/html/labnet{{ {{ mac_address }} }}.ipxe
+    dest: /var/www/html/labnet{{ mac_address }}.ipxe
   when: raw_mac_address.changed

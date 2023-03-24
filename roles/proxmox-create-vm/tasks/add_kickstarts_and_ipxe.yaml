@@ -16,9 +16,11 @@
   template: 
     src: kickstart.ks.j2
     dest: /var/www/html/rocky/8/ks/{{ mac_address }}.ks
+  when: raw_mac_address.changed
     
 - name: Add ipxe
   delegate_to: "{{ groups.ipxe_servers[0] }}"
   template:
     src: mac-address-template.ipxe.j2
     dest: /var/www/html/labnet/{{ ansible_host }}.ipxe
+  when: raw_mac_address.changed

@@ -9,9 +9,9 @@
   when: "'running' in item.stdout"
   set_fact:
     count: "{{ count | int + 1 }}"
-  loop: {{ status.results }}
+  loop: "{{ status.results }}"
 
-- name: Check if still running
+- name: If still running, restart {{ count }}
   when:
     - "running" in status.stdout 
     - count < 300

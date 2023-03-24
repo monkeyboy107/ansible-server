@@ -4,10 +4,10 @@
   register: all_VMIDs
   delegate_to: "{{ groups.proxmox_servers[0] }}"
 
-- name: Retrieve every hostname
-  shell: "qm list | awk {'print $2, $1'}"
-  register: all_hostnames
-  delegate_to: "{{ groups.proxmox_servers[0] }}"
+#- name: Retrieve every hostname
+#  shell: "qm list | awk {'print $2, $1'}"
+#  register: all_hostnames
+#  delegate_to: "{{ groups.proxmox_servers[0] }}"
 
 # I wanted a dict so I can make for damn sure that the vmids aren't overlapping.
 # I prefer a single VM to be able to deploy than no VM deploy 
@@ -16,10 +16,10 @@
     all_VMIDs_dict: "{{ all_VMIDs_dict | combine({item.split(' ')[0]: item.split(' ')[1]} ) }}"
   loop: "{{ all_VMIDs.stdout_lines }}"
 
-- name: Make dict of hostnames with VMIDs 
-  set_fact:
-    all_hostnames_dict: "{{ all_hostnames_dict | combine({item.split(' ')[1]: item.split(' ')[0]} ) }}"
-  loop: "{{ all_VMIDs.stdout_lines }}"
+#- name: Make dict of hostnames with VMIDs 
+#  set_fact:
+#    all_hostnames_dict: "{{ all_hostnames_dict | combine({item.split(' ')[1]: item.split(' ')[0]} ) }}"
+#  loop: "{{ all_VMIDs.stdout_lines }}"
 
 - name: Generate VMIDs and append a list
   run_once: true

@@ -22,4 +22,7 @@
   loop_control:
     loop_var: "guest_vmid"
   include_tasks: "add_kickstarts_and_ipxe.yaml"
-  
+
+- name: Add kickstarts and ipxe scripts
+  loop: "{{ ID_list }}"
+  shell: "qm start {{ item }}"

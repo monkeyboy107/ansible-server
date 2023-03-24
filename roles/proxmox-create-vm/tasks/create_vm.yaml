@@ -8,7 +8,7 @@
 # Create the VM
 - name: Create VM
   run_once: true
-  shell: "qm create {{ item }} --name {{ all_VMIDs_dict[item] }} --scsihw virtio-scsi-pci --acpi 1 --agent 1 --sockets 1 --cores 1 --memory 1024 --net0 virtio,bridge=vmbr0 --scsi0 local-lvm:vm-{{ item }}-disk-0,size=32G --ostype l26 --boot 'order=scsi0;net0'"
+  shell: "qm create {{ item }} --name {{ all_VMIDs_dict[item] }} --scsihw virtio-scsi-pci --acpi 1 --agent 1 --sockets 1 --cores 1 --memory 3072 --net0 virtio,bridge=vmbr0 --scsi0 local-lvm:vm-{{ item }}-disk-0,size=32G --ostype l26 --boot 'order=scsi0;net0'"
   delegate_to: "{{ groups.proxmox_servers[0] }}"
   loop: "{{ ID_list }}"
   when: all_VMIDs_dict[item] == guest_host

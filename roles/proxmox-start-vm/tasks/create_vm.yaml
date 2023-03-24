@@ -7,7 +7,7 @@
 - name: Check if still running
   when status.stdout == "status: running"
   set_fact:
-    count: {{ count | int + 1 }}
+    count: "{{ count | int + 1 }}"
 
 - name: Check if still running
   when:

@@ -7,7 +7,7 @@
 
 - name: Filter for the mac address	
   set_fact:
-    mac_address: "{{ [ item.stdout | lower ] + mac_addresses }}"
+    mac_address: "{{ item.stdout | lower }}"
   when: raw_mac_address.changed
   loop: "{{ raw_mac_address.results }}"
   

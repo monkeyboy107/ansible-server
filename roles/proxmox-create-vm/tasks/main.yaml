@@ -27,3 +27,6 @@
   loop: "{{ ID_list }}"
   shell: "qm start {{ item }}"
   delegate_to: "{{ groups.proxmox_servers[0] }}"
+
+- name: Check if the VMs are installed
+  include_tasks: "vm_installed.yaml"

@@ -4,3 +4,4 @@ all_hostnames_dict: []
 vmid_start: 4000
 ID_list: []
 mac_addresses: []
+count: 0

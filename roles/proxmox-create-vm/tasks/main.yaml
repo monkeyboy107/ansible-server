@@ -14,8 +14,8 @@
     loop_var: "guest_host"
   include_tasks: "create_vm.yaml"
 
-- name: Retrieve VMIDs
-  include_tasks: "retrieve_VMIDs.yaml"
+#- name: Retrieve VMIDs
+#  include_tasks: "retrieve_VMIDs.yaml"
 
 - name: Add kickstarts and ipxe scripts
   loop: "{{ ID_list }}"

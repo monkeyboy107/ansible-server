@@ -7,16 +7,15 @@
 
 - name: Filter for the mac address	
   set_fact:
-    mac_addresses: "{{ [ item.stdout | lower ] + mac_addresses }}"
-  when: item.changed
+    mac_address: "{{ [ item.stdout | lower ] + mac_addresses }}"
+  when: raw_mac_address.changed
   loop: "{{ raw_mac_address.results }}"
   
 - name: Add kickstarts
   delegate_to: "{{ groups.ipxe_servers[0] }}"
   template: 
     src: kickstart.ks.j2
-    dest: /var/www/html/rocky/8/ks/{{ mac }}.ks
-  loop: "{{ mac_addresses }}"
+    dest: /var/www/html/rocky/8/ks/{{ mac_address }}.ks
     
 - name: Add ipxe
   delegate_to: "{{ groups.ipxe_servers[0] }}"

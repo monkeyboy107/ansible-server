@@ -1,17 +1,19 @@
 ---
 - name: Check if VM is still installing
   delegate_to: "{{ groups.proxmox_servers[0] }}"
-  shell: "qm status {{ vm_name[inventory_hostname] }}"
+  shell: "qm status {{ item }}"
   register: status
+  loop: "{{ ID_list }}"
 
 - name: Check if still running
-  when: "'running' in status.stdout"
+  when: "'running' in item.stdout"
   set_fact:
     count: "{{ count | int + 1 }}"
+  loop: {{ status.results }}
 
 - name: Check if still running
   when:
-    - status.stdout == "status: running"
+    - "running" in status.stdout 
     - count < 300
   include_tasks: "create_vm.yaml"
 

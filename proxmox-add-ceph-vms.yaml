@@ -8,6 +8,7 @@
   
 - name: Configure the ceph vms
   import_playbook: proxmox-configure-ceph-vms.yaml
+  tags: always
 
 - name: Start ceph vms
   import_playbook: proxmox-start-ceph-vms.yaml

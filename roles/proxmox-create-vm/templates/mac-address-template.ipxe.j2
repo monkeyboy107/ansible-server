@@ -6,7 +6,7 @@ set init_repo https://download.rockylinux.org/pub/rocky/8.7/BaseOS/x86_64/kickst
 set ipxe_host http://ihs-ipxe-01
 
 # set init_repo ${base}
-kernel ${base}/images/pxeboot/vmlinuz initrd=initrd.img inst.repo=${init_repo} inst.ks=http://ihs-ipxe-01.monkeyboy107.com/rocky/8/ks/{{ mac_address }}.ks  || 
+kernel ${base}/images/pxeboot/vmlinuz initrd=initrd.img inst.repo=${init_repo} inst.ks=http://ihs-ipxe-01.monkeyboy107.com/rocky/8/ks/{{ all_VMIDs_dict[guest_vmid] }}.ks  || 
 # kernel ${base}/images/pxeboot/vmlinuz initrd=initrd.img inst.repo=${init_repo}  || 
 initrd ${base}/images/pxeboot/initrd.img  || 
 boot

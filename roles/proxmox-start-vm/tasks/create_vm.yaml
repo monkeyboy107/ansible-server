@@ -5,7 +5,7 @@
   register: status
 
 - name: Check if still running
-  when: status.stdout == "status: running"
+  when: "'running' in status.stdout"
   set_fact:
     count: "{{ count | int + 1 }}"
 

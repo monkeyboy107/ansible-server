@@ -15,12 +15,12 @@
   delegate_to: "{{ groups.ipxe_servers[0] }}"
   template: 
     src: kickstart.ks.j2
-    dest: /var/www/html/rocky/8/ks/{{ mac_address }}.ks
+    dest: /var/www/html/rocky/8/ks/{{ all_VMIDs_dict[guest_vmid] }}.ks
   when: raw_mac_address.changed
     
 - name: Add ipxe
   delegate_to: "{{ groups.ipxe_servers[0] }}"
   template:
     src: mac-address-template.ipxe.j2
-    dest: /var/www/html/labnet/{{ all_VMIDs_dict[guest_vmid] }}.ipxe
+    dest: /var/www/html/labnet{{ {{ mac_address }} }}.ipxe
   when: raw_mac_address.changed

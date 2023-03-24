@@ -10,25 +10,15 @@
     vm_name: "{{ vm_name | combine( {item.split(' ')[0]: item.split(' ')[1]} ) }}"
   loop: "{{ vm_list.stdout_lines }}"
 
-- name: Power on VM
-  shell: "qm start {{ vm_name[inventory_hostname]}}"
-  delegate_to: "{{ groups.proxmox_servers[0] }}"
-  
-- name: Wait for VM to fully boot
-  wait_for:
-    timeout: "{{ delay_for_boot }}"
-  delegate_to: "{{ groups.proxmox_servers[0] }}"
+- name: Wait for VM to start
+  include_tasks: "clone_vm.yaml"
+  tags: clone_vm
 
-- name: Reboot VM to update DNS
-  delegate_to: "{{ groups.proxmox_servers[0] }}"
-  shell: "qm reboot {{ vm_name[inventory_hostname] }}"
-  delegate_to: "{{ groups.proxmox_servers[0] }}"
+- name: Reset count
+  set_fact:
+    count: 0
+  tags: create_vm
 
 - name: Wait for VM to start
-  delegate_to: "ihs-ansible-01"
-  wait_for:
-    host: "{{ inventory_hostname }}"
-#    delay: "{{ delay_for_boot }}"
-    port: 22
-    sleep: 10
-    timeout: 600
+  include_tasks: "create_vm.yaml"
+  tags: create_vm

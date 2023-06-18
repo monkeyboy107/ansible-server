@@ -1,42 +1,11 @@
 [all]
 ihs-ansible-01 
 
-[ceph_monitors]
-ihs-ceph-monitor-[01:05].monkeyboy107.com
-
-[ceph_osds]
-ihs-ceph-osd-[01:03].monkeyboy107.com
-
-[ceph_admins:children]
-ceph_monitors
-
-[ceph_mgrs:children]
-ceph_monitors
-
-[ceph_nfs:children]
-ceph_osds
-
-[ceph_rgw:children]
-ceph_osds
-
-[ceph_mds:children]
-ceph_osds
-
-[ceph_iscsi:children]
-ceph_osds
-
-[ceph_servers:children]
-ceph_monitors
-ceph_osds
-ceph_admins
-ceph_mgrs
-ceph_nfs
-ceph_rgw
-ceph_mds
-ceph_iscsi
-
 [hypervisor_servers:children]
 proxmox_servers
+
+[bareos_servers:children]
+ihs-bareos-dir_servers
 
 [proxmox_servers]
 ihs-hypervisor-01 ansible_remote_tmp=/tmp/.ansible/tmp
@@ -44,5 +13,14 @@ ihs-hypervisor-01 ansible_remote_tmp=/tmp/.ansible/tmp
 [ipxe_servers]
 ihs-ipxe-01.monkeyboy107.com
 
-[ipxe_web_servers:children]
-ipxe_servers
+[bareos-dir_servers]
+ihs-bareos-dir-01.monkeyboy107.com
+
+[plex]
+ihs-plex-01.monkeyboy107.com
+
+[network-manager]
+ihs-network-manager-01.monkeyboy107.com
+
+[nas]
+ihs-nas-01.monkeyboy107.com

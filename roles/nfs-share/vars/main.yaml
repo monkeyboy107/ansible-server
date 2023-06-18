@@ -1,3 +1,4 @@
-nfs_name: /ihs-nas-01
-nfs_server: "{{ nfs_name }}.monkeyboy107.com"
-nfs_share: /mnt/pool-01/files
+nfs_server: ihs-nas-01
+nfs_local_mount_point: "/{{ nfs_server }}"
+nfs_fqdn: "{{ nfs_server }}.monkeyboy107.com"
+nfs_remote_mount_point: /mnt/pool-01/files

@@ -1,4 +1,4 @@
-- name: "Create folder {{ nfs_name }}"
+- name: "Create folder {{ nfs_local_mount_point }}"
   file: 
     path: "{{ nfs_name }}"
     state: directory
@@ -8,8 +8,8 @@
 
 - name: Mount nfs-share
   mount:
-    path: "{{ nfs_name }}"
-    src: "{{ nfs_server }}:{{ nfs_share }}"
+    path: "{{ nfs_local_mount_point }}"
+    src: "{{ nfs_fqdn }}:{{ nfs_remote_mount_point }}"
     fstype: nfs
     opts: defaults,_netdev,x-systemd.automount
     state: mounted

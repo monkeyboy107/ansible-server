@@ -1,5 +1,7 @@
 [all]
 ihs-ansible-01
+
+[all:children]
 bareos_servers
 hypervisor_servers
 ipxe_servers

@@ -1,5 +1,5 @@
 - name: Setup ansible
-  hosts: all
+  hosts: all!nas_servers
   become: yes
   remote_user: isaac
   gather_facts: yes

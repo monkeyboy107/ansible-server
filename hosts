@@ -1,5 +1,12 @@
 [all]
-ihs-ansible-01 
+ihs-ansible-01
+bareos_servers
+hypervisor_servers
+ipxe_servers
+bareos-dir_servers
+plex_servers 
+network-manager_servers
+nas_servers
 
 [hypervisor_servers:children]
 proxmox_servers
@@ -16,11 +23,11 @@ ihs-ipxe-01.monkeyboy107.com
 [bareos-dir_servers]
 ihs-bareos-dir-01.monkeyboy107.com
 
-[plex]
+[plex_servers]
 ihs-plex-01.monkeyboy107.com
 
-[network-manager]
+[network-manager_servers]
 ihs-network-manager-01.monkeyboy107.com
 
-[nas]
+[nas_servers]
 ihs-nas-01.monkeyboy107.com

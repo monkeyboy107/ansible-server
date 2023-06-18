@@ -1,0 +1,15 @@
+- name: Create folder {{ nfs_name }}
+  file: 
+    path: {{ nfs_name }}
+    state: directory
+    owner: root
+    group: root
+    mode: '0775'
+
+- name: Mount nfs-share
+  mount:
+    path: {{ nfs_name }}
+    src: {{ nfs_server }}:{{ nfs_share }}
+    fstype: nfs
+    opts: defaults,_netdev,x-systemd.automount
+    state: mounted

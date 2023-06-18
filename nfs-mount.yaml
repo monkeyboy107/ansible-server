@@ -1,0 +1,8 @@
+- name: Add and mount the NFS share
+  hosts: all:!nas_servers:!hypervisor_servers
+  become: yes
+  gather_facts: no
+  tasks:
+   - name: Add NFS mounting point 
+     import_role:
+       name: nfs-share

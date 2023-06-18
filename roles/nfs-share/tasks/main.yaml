@@ -1,6 +1,6 @@
 - name: "Create folder {{ nfs_local_mount_point }}"
   file: 
-    path: "{{ nfs_name }}"
+    path: "{{ nfs_local_mount_point }}"
     state: directory
     owner: root
     group: root

@@ -2,6 +2,7 @@
   uri:
     url: https://download.bareos.org/current/EL_8/add_bareos_repositories.sh
     dest: /tmp/
+    mode: +x
 
 - name: Run repo script
   shell: "/tmp/add_bareos_repositories.sh"

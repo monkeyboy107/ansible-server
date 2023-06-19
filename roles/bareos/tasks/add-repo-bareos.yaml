@@ -4,5 +4,5 @@
     dest: /tmp/
 
 - name: Run repo script
-  shell: "/mnt/add_bareos_repositories.sh"
+  shell: "/tmp/add_bareos_repositories.sh"
 

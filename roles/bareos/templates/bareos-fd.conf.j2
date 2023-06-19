@@ -1,6 +1,6 @@
 Director {
-  Name = {{ inventory_hostname }}
+  Name = {{ inventory_hostname_short }}-fd
 {{ password }}
-  Description = "This has been added via ansible for the host {{ host }}"
+  Description = "This has been added via ansible for the host {{ inventory_hostname_short }}"
 }
 

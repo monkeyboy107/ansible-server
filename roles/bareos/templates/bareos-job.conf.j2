@@ -1,0 +1,6 @@
+Job {
+  Name = "backup-{{ inventory_hostname_short }}-fd"
+  JobDefs = "LinuxJob"
+  Client = "{{ inventory_hostname_short }}-fd"
+}
+

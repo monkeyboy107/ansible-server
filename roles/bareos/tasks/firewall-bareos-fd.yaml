@@ -4,4 +4,4 @@
     permanent: true
     state: enabled
     immediate: true
-    ignore_error: true
+  ignore_error: true

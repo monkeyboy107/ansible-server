@@ -1,0 +1,4 @@
+- name: Reloading bareos director
+  shell: "echo reload | bconsole"
+  delegate_to: "{{ groups['bareos-dir_servers'][0]}}"
+  run_once: true

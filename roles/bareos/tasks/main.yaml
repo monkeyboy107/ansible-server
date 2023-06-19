@@ -1,0 +1,5 @@
+- name: Add repos
+  include_tasks: "add-repo-bareos.yaml"
+
+- name: Install bareos-fd
+  include_tasks: "install-configure-bareos-fd.yaml"

@@ -1,0 +1,5 @@
+- name:
+  yum_repository:
+    name: bareos-community
+    description: Bareos repos
+    baseurl: https://download.bareos.org/current/EL_8/bareos.repo

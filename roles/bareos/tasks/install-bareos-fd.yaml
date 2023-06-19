@@ -1,0 +1,10 @@
+- name: Install bareos-fd
+  yum:
+    name: bareos-fd
+    state: latest
+
+- name: Enable bareos-fd
+  systemd:
+    state: started
+    name: bareos-fd
+    enabled: true

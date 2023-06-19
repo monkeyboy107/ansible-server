@@ -1,0 +1,7 @@
+- name: Install bareos-fd
+  include_tasks: "install-bareos-fd.yaml"
+
+- name: Configure firewall-cmd
+  include_tasks: "firewall-bareos-fd.yaml"
+
+- name: Copy configs to bareos

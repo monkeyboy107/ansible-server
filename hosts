@@ -14,7 +14,7 @@ nas_servers
 proxmox_servers
 
 [bareos_servers:children]
-ihs-bareos-dir_servers
+bareos-dir_servers
 
 [proxmox_servers]
 ihs-hypervisor-01 ansible_remote_tmp=/tmp/.ansible/tmp

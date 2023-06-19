@@ -1,0 +1,6 @@
+- name: Enable bareos-fd through firewall
+  firewalld:
+    port: 9102/tcp
+    permanent: true
+    state: enabled
+    immediate: true

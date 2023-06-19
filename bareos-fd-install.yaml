@@ -1,4 +1,4 @@
-- name: Add and mount the NFS share
+- name: Installing bareos-fd 
   hosts: all:!nas_servers:!hypervisor_servers:!bareos_servers
   become: yes
   gather_facts: no

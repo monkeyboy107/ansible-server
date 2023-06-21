@@ -25,9 +25,6 @@ ihs-ipxe-01.monkeyboy107.com
 [bareos-dir_servers]
 ihs-bareos-dir-01.monkeyboy107.com
 
-[plex_servers]
-ihs-plex-01.monkeyboy107.com
-
 [network-manager_servers]
 ihs-network-manager-01.monkeyboy107.com
 

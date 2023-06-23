@@ -1,5 +1,6 @@
 ---
 - name: Start VM
+  delegate_to: "{{ groups.proxmox_servers[0] }}"
   shell: "qm start {{ vm_name[inventory_hostname] }}"
 
 - name: Check if VM is still installing
@@ -19,4 +20,5 @@
   include_tasks: "create_vm.yaml"
 
 - name: Start VM
+  delegate_to: "{{ groups.proxmox_servers[0] }}"
   shell: "qm start {{ vm_name[inventory_hostname] }}"

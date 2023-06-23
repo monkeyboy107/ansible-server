@@ -2,8 +2,8 @@
 # Checks if the vmid is in use, if not then it will increment and then call itself
 - name: Is vmid "{{ vmid_start }}" avalible
   when:
-    - vmid_start | string is in all_VMIDs_dict.keys()
-    - vmid_start | string is in ID_list
+    - vmid_start | string is not in all_VMIDs_dict.keys()
+    - vmid_start | string is not in ID_list
   set_fact:
     vmid_start: "{{ vmid_start | int + 1 }}"
 

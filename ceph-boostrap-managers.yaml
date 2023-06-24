@@ -1,9 +1,9 @@
-- name: Install python
+- name: Install packages
   hosts: ceph_servers
   become: yes
   gather_facts: no
   tasks:
-    - name: Install packages
+    - name: Install "{{ item }}"
       dnf:
         name: "{{ item }}"
         state: "present"

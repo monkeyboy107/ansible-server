@@ -19,6 +19,6 @@
     count: 0
   tags: create_vm
 
-- name: Wait for VM to start
-  include_tasks: "create_vm.yaml"
-  tags: create_vm
+#- name: Wait for VM to start
+#  include_tasks: "create_vm.yaml"
+#  tags: create_vm

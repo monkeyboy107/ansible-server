@@ -3,13 +3,14 @@
   become: yes
   gather_facts: no
   tasks:
-    - name: Install "{{ item }}"
+    - name: Install packages
       dnf:
         name: "{{ item }}"
         state: "present"
       loop:
         - python3
         - wget
+        - podman
 
 - name: Setup admin boostrap
   hosts: ceph_admins[0]

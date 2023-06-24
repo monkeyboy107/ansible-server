@@ -7,9 +7,9 @@
       dnf:
         name: "{{ item }}"
         state: "present"
-    - loop:
-      - python3
-      - wget
+      loop:
+        - python3
+        - wget
 
 - name: Setup admin boostrap
   hosts: ceph_admins[0]

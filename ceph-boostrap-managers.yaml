@@ -3,10 +3,13 @@
   become: yes
   gather_facts: no
   tasks:
-    - name: Install python
+    - name: Install packages
       dnf:
-        name: "python3"
+        name: "{{ item }}"
         state: "present"
+    - loop:
+      - python3
+      - wget
 
 - name: Setup admin boostrap
   hosts: ceph_admins[0]

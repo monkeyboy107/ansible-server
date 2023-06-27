@@ -1,5 +1,5 @@
 [all]
-ihs-ansible-01
+ihs-ansible-0[1:2]
 
 [all:children]
 bareos_servers

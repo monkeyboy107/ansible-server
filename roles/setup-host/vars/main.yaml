@@ -1,0 +1,13 @@
+packages:
+  - firewalld
+  - vim
+  - bind-utils-32
+  - network-scripts
+daemons:
+  - firewalld
+repos:
+  - 
+firewall-port:
+  - 22/tcp
+firewall-service:
+  - ssh

@@ -1,0 +1,12 @@
+---
+- name: Enable repos
+  include_tasks: enable-repo.yaml
+
+- name: Install packages
+  include_tasks: install-packages.yaml
+
+- name: Enable daemons
+  include_tasks: enable-daemons.yaml 
+
+- name: Enable through firewall 
+  include_tasks: allow-ports-and-services.yaml

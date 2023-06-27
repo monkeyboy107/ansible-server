@@ -1,0 +1,4 @@
+---
+- name: "Enabling {{ item }}"
+  dnf:
+    enablerepo: "{{ item }}"

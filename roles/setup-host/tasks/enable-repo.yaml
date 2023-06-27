@@ -1,0 +1,5 @@
+---
+- name: "Enabling {{ name }}"
+  dnf:
+    enable: "{{ item }}"
+  loop: repos

@@ -1,0 +1,13 @@
+---
+- name: "Enable {{ item }} through the firewall"
+  firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+    loop: firewall-service
+
+- name: Enable port/protocol
+   port: "{{ item }}"
+   permanent: true
+   state: enabled
+   loop: firewall-port

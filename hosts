@@ -24,3 +24,6 @@ ihs-bareos-dir-01.monkeyboy107.com
 
 [nas_servers]
 ihs-nas-01.monkeyboy107.com
+
+[idm_servers]
+ihs-idm-0[1:3]

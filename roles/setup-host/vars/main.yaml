@@ -6,7 +6,7 @@ packages:
 daemons:
   - firewalld
 repos:
-  - empty
+  -
 firewall-port:
   - 22/tcp
 firewall-service:

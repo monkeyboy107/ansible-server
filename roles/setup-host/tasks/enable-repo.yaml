@@ -3,4 +3,4 @@
   dnf:
     enable: "{{ item }}"
   loop: repos
-  when: repos
+  when: repos is not 'empty'

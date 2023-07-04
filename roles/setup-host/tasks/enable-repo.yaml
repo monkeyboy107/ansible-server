@@ -3,3 +3,4 @@
   dnf:
     enable: "{{ item }}"
   loop: repos
+  when: repos

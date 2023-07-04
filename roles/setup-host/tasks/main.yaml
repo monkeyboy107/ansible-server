@@ -1,6 +1,6 @@
 ---
-- name: Enable repos
-  include_tasks: enable-repo.yaml
+#- name: Enable repos
+#  include_tasks: enable-repo.yaml
 
 - name: Install packages
   include_tasks: install-packages.yaml

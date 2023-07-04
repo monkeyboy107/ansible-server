@@ -6,10 +6,8 @@ ihs-ansible-0[1:2]
 [all:children]
 bareos_servers
 hypervisor_servers
-ipxe_servers
+# ipxe_servers
 bareos-dir_servers
-plex_servers 
-network-manager_servers
 nas_servers
 
 [hypervisor_servers:children]
@@ -21,14 +19,8 @@ bareos-dir_servers
 [proxmox_servers]
 ihs-hypervisor-01 ansible_remote_tmp=/tmp/.ansible/tmp
 
-[ipxe_servers]
-ihs-ipxe-01.monkeyboy107.com
-
 [bareos-dir_servers]
 ihs-bareos-dir-01.monkeyboy107.com
-
-[network-manager_servers]
-ihs-network-manager-01.monkeyboy107.com
 
 [nas_servers]
 ihs-nas-01.monkeyboy107.com

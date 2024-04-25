@@ -13,7 +13,7 @@
   shell: "qm reboot {{ vm_name[inventory_hostname] }}"
   
 - name: Wait for VM to start
-  delegate_to: "ihs-ansible-01"
+  delegate_to: "{{ groups.proxmox_servers[0] }}"
   wait_for:
     host: "{{ inventory_hostname }}"
 #    delay: "{{ delay_for_boot }}"

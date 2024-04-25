@@ -1,5 +1,5 @@
 - name: Create the jenkins_vms
-  hosts: jenkins_masters_servers
+  hosts: jenkins_masters
   become: yes
   gather_facts: no
   tasks:

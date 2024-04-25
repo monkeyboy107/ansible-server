@@ -5,4 +5,4 @@
   tasks:
    - name: Create the VMs
      import_role:
-       name: proxmox-create-vm
+       name: proxmox-clone-vm

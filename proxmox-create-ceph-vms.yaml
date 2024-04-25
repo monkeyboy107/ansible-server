@@ -6,6 +6,3 @@
    - name: Create the VMs
      import_role:
        name: proxmox-create-vm
-   - name: Start the VMs
-     import_role:
-       name: proxmox-start-vm

@@ -1,4 +1,4 @@
-- name: Create the jenkins_vms
+- name: Create and configure the jenkins masters
   hosts: jenkins_masters
   become: yes
   gather_facts: no
@@ -6,3 +6,6 @@
    - name: Create the VMs
      import_role:
        name: proxmox-clone-vm
+   - name: Start the VMs
+     import_role:
+       name: proxmox-start-vm

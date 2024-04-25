@@ -9,6 +9,7 @@ hypervisor_servers
 # ipxe_servers
 bareos-dir_servers
 nas_servers
+jenkins_servers
 
 [hypervisor_servers:children]
 proxmox_servers
@@ -27,3 +28,10 @@ ihs-nas-01.monkeyboy107.com
 
 [idm_servers]
 ihs-idm-0[1:3]
+
+[jenkins_servers:children]
+jenkins_master
+jenkins_workers
+
+[jenkins_masters]
+ihs-jenkins-masters-0[1:3].monkeyboy107.com

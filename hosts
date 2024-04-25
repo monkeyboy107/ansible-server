@@ -30,7 +30,7 @@ ihs-nas-01.monkeyboy107.com
 ihs-idm-0[1:3]
 
 [jenkins_servers:children]
-jenkins_master
+jenkins_masters
 jenkins_workers
 
 [jenkins_masters]
